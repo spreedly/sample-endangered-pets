@@ -1,0 +1,19 @@
+development: &development
+  adapter: mysql
+  database: core_sample_development
+  username: root
+  password:
+  host: localhost
+  encoding: utf8
+
+test: &test
+  adapter: mysql
+  database: core_sample_test
+  username: root
+  password:
+  host: localhost
+  encoding: utf8
+
+production:
+  <<: *development
+
