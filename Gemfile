@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', :path => '/Users/duff/code/random/rails'
-gem 'arel',  :git => 'git://github.com/rails/arel.git'
+gem 'bundler', "1.0.0.rc.6"
+gem 'rails', "3.0.0.rc2"
+gem 'arel',  "1.0.0.rc1"
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
