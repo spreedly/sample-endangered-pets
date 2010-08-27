@@ -1,0 +1,25 @@
+
+= f.error_messages
+%fieldset
+  .set
+    .half
+      = f.label :first_name, nil, :class => :textbox
+      = f.text_field :first_name, :class => :textbox
+    .half
+      = f.label :last_name, nil, :class => :textbox
+      = f.text_field :last_name, :class => :textbox
+  .set
+    = f.label :type, "Card Type", :class => :textbox
+    = f.select :type, [ "visa", "master" ]
+  .set
+    .half
+      = f.label :number, "Card Number", :class => :textbox
+      = f.text_field :number, :class => :textbox
+    #cvc.half
+      = f.label :verification_value, "Security Code", :class => :textbox
+      = f.text_field :verification_value, :class => :textbox
+  .set.auto
+    = f.label :month, "Expires on", :class => :textbox
+    = select_month(1, :add_month_numbers => true, :prefix => "credit_card", :field_name => :month)
+    = select_year(2010, :start_year => Date.today.year, :end_year => Date.today.year + 10, :prefix => "credit_card", :field_name => :year)
+
