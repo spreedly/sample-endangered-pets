@@ -7,8 +7,12 @@
     = javascript_include_tag "application" 
       
   %body
+    #nav
+      .content
+        = render 'layouts/login_options'
     #page
       .content
         #main
+          = render '/layouts/flash_details'
           .inner= yield
 
