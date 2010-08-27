@@ -4,4 +4,6 @@ To get the sample site running locally:
 
 Clone or fork the repo.
 cp config/database.yml.example config/database.yml
+rake db:create:all
+rake db:schema:load
 
