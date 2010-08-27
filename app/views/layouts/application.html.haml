@@ -9,6 +9,8 @@
   %body
     #nav
       .content
+        %h1= link_to_unless_current "Spreedly Core Sample", root_url
+
         = render 'layouts/login_options'
     #page
       .content
