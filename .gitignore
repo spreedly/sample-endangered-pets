@@ -2,5 +2,6 @@
 db/*.sqlite3
 log/*.log
 tmp/**/*
+tmp/*
 config/database.yml
 config/spreedly_core.yml
