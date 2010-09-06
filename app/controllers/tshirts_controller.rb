@@ -9,7 +9,7 @@ class TshirtsController < ApplicationController
 
   def transparent_redirect_complete
     payment_method_token = params[:token]
-    @result = SpreedlyCore.purchase(payment_method_token, "0.02")
+    @result = SpreedlyCore.purchase(payment_method_token, "2")
     puts @result.code.to_s.magenta
     puts @result.body.yellow
     # return render(:action => :buy_tshirt) if @result.code.to_s == "422"
