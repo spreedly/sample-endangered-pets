@@ -16,7 +16,6 @@ class TshirtsController < ApplicationController
       return render(:action => :buy_tshirt) 
     end
 
-    redirect_to buy_tshirt_url
   end
 
 
