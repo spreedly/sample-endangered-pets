@@ -10,10 +10,12 @@ class TshirtsController < ApplicationController
 
   def transparent_redirect_complete
     result = SpreedlyCore.purchase(params[:token], "2")
+    # puts result.body.yellow
     if result.code == 422
       establish_card_with_errors(result)
       set_flash_error(result)
-      return render(:action => :buy_tshirt) 
+      @payment_method_token = params[:token]
+      return render(:action => :buy_tshirt)
     end
 
     redirect_to successful_purchase_url
@@ -23,7 +25,7 @@ class TshirtsController < ApplicationController
 
   end
 
-  
+
   private
     def set_flash_error(result)
       flash.now[:error] = result["transaction"]["response"]["message"]
@@ -34,15 +36,15 @@ class TshirtsController < ApplicationController
       @credit_card = new_card(result["transaction"]["payment_method"])
       @credit_card.errors = validation_errors_from(result.body)
     end
-    
+
     def new_card(attributes = {})
       defaults = { "first_name" => nil, "last_name" => nil, "number" => nil, "verification_value" => nil }
-      
+
       # Temporary for making testing in the UI easier
       # defaults = { "first_name" => "Joe", "last_name" => "Smith", "number" => "4222222222222", "verification_value" => '232', "year" => 2013 }
-      
+
       card = OpenStruct.new(defaults.merge(attributes))
-      card.errors = ActiveModel::Errors.new(card) 
+      card.errors = ActiveModel::Errors.new(card)
       card.class.extend ActiveModel::Translation
       card
     end
