@@ -9,8 +9,9 @@ class TshirtsController < ApplicationController
   end
 
   def transparent_redirect_complete
-    result = SpreedlyCore.purchase(params[:token], "2")
-    # puts result.body.yellow
+    result = SpreedlyCore.purchase(params[:token], 5)
+    # result = SpreedlyCore.authorize(params[:token], 5)
+    puts result.body.yellow
     if result.code == 422
       establish_card_with_errors(result)
       set_flash_error(result)
