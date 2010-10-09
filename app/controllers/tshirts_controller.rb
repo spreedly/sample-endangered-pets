@@ -12,7 +12,7 @@ class TshirtsController < ApplicationController
     result = SpreedlyCore.purchase(params[:token], 5)
     # result = SpreedlyCore.authorize(params[:token], 5)
     puts result.body.yellow
-    if result.code == 422
+    if result.code != 200
       establish_card_with_errors(result)
       set_flash_error(result)
       @payment_method_token = params[:token]
