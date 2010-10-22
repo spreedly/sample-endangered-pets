@@ -5,3 +5,4 @@ tmp/**/*
 tmp/*
 config/database.yml
 config/spreedly_core.yml
+*.tmproj
