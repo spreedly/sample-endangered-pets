@@ -1,11 +1,11 @@
 class SpreedlyCore
   
-  HOST = "core.spreedly.com:3000"
+  BASE = "http://demo.pciinthecloud.com"
 
   include HTTParty
   headers 'Accept' => 'text/xml'
   headers 'Content-Type' => 'text/xml'
-  base_uri "http://#{HOST}/v1"
+  base_uri "#{BASE}/v1"
   format :xml
 
   def self.configure(api_login, api_secret, gateway_token)
