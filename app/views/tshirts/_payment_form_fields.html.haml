@@ -19,7 +19,7 @@
   .set
     = f.label :verification_value, "Security Code", :class => :textbox
     = f.text_field :verification_value, :class => :textbox
-    
+
   .set
     = f.label :month, "Expires on", :class => :textbox
     = select_month(@credit_card.month, :add_month_numbers => true, :prefix => "credit_card", :field_name => :month)

@@ -7,7 +7,7 @@ Well... not really.  We'll charge you $0.05 but we won't send you shirt.
 %h3 Payment Information
 
 = error_messages_for 'credit_card', :object_name => "credit card"
-= form_for @credit_card, :as => :credit_card, :url => "#{SpreedlyCore::BASE}/v1/payment_methods" do |f|
+= form_for @credit_card, :as => :credit_card, :url => SpreedlyCore.add_payment_method_url do |f|
   = hidden_field_tag :redirect_url, transparent_redirect_complete_url
   = hidden_field_tag :api_login, SpreedlyCore.api_login
   = hidden_field_tag :payment_method_token, @payment_method_token
