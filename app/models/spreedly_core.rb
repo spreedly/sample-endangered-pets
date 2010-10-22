@@ -1,6 +1,6 @@
 class SpreedlyCore
   
-  BASE = "http://demo.pciinthecloud.com"
+  BASE = "https://demo.pciinthecloud.com"
 
   include HTTParty
   headers 'Accept' => 'text/xml'
