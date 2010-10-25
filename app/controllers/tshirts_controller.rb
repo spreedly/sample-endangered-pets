@@ -43,7 +43,7 @@ class TshirtsController < ApplicationController
     end
 
     def new_card(attributes = {})
-      defaults = { "first_name" => nil, "last_name" => nil, "number" => nil, "verification_value" => nil }
+      defaults = { "first_name" => nil, "last_name" => nil, "number" => nil, "verification_value" => nil, :data => nil }
 
       # Temporary for making testing in the UI easier
       # defaults = { "first_name" => "Joe", "last_name" => "Smith", "number" => "4222222222222", "verification_value" => '232', "year" => 2013 }
