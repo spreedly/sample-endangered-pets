@@ -2,8 +2,6 @@ require 'ostruct'
 
 class TshirtsController < ApplicationController
 
-  before_filter :login_required
-
   def buy_tshirt
     @credit_card = new_card
   end
@@ -11,7 +9,7 @@ class TshirtsController < ApplicationController
   def transparent_redirect_complete
     unless params[:error].blank?
       @credit_card = new_card
-      flash[:error] = params[:error]
+      flash.now[:error] = params[:error]
       return render(:action => :buy_tshirt)
     end
 
