@@ -9,6 +9,12 @@ class TshirtsController < ApplicationController
   end
 
   def transparent_redirect_complete
+    unless params[:error].blank?
+      @credit_card = new_card
+      flash[:error] = params[:error]
+      return render(:action => :buy_tshirt)
+    end
+
     result = SpreedlyCore.purchase(params[:token], 5)
     # result = SpreedlyCore.authorize(params[:token], 5)
     puts result.body.yellow
