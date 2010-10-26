@@ -3,27 +3,21 @@ require 'ostruct'
 class TshirtsController < ApplicationController
 
   def buy_tshirt
-    @credit_card = new_card
+    @credit_card = CreditCard.new
   end
 
   def transparent_redirect_complete
-    unless params[:error].blank?
-      @credit_card = new_card
-      flash.now[:error] = params[:error]
-      return render(:action => :buy_tshirt)
-    end
+    return if error_saving_card
 
-    result = SpreedlyCore.purchase(params[:token], 5)
-    # result = SpreedlyCore.authorize(params[:token], 5)
-    puts result.body.yellow
-    if result.code != 200
-      establish_card_with_errors(result)
-      set_flash_error(result)
-      @payment_method_token = params[:token]
-      return render(:action => :buy_tshirt)
-    end
+    @payment_method_token = params[:token]
+    @credit_card = CreditCard.new(SpreedlyCore.get_payment_method(@payment_method_token))
+    return render(:action => :buy_tshirt) unless @credit_card.valid?
 
-    redirect_to successful_purchase_url
+    response = SpreedlyCore.purchase(params[:token], 4 * @credit_card.how_many.to_i)
+    return redirect_to(successful_purchase_url) if response.code == 200
+
+    set_flash_error(response)
+    render(:action => :buy_tshirt)
   end
 
   def successful_purchase
@@ -32,37 +26,17 @@ class TshirtsController < ApplicationController
 
 
   private
-    def set_flash_error(result)
-      flash.now[:error] = result["transaction"]["response"]["message"]
-    rescue Exception
+    def set_flash_error(response)
+      flash.now[:error] = response["transaction"]["response"]["message"]
     end
 
-    def establish_card_with_errors(result)
-      @credit_card = new_card(result["transaction"]["payment_method"])
-      @credit_card.errors = validation_errors_from(result.body)
-    end
+    def error_saving_card
+      return false if params[:error].blank?
 
-    def new_card(attributes = {})
-      defaults = { "first_name" => nil, "last_name" => nil, "number" => nil, "verification_value" => nil, :data => nil }
-
-      # Temporary for making testing in the UI easier
-      # defaults = { "first_name" => "Joe", "last_name" => "Smith", "number" => "4222222222222", "verification_value" => '232', "year" => 2013 }
-
-      card = OpenStruct.new(defaults.merge(attributes))
-      card.errors = ActiveModel::Errors.new(card)
-      card.class.extend ActiveModel::Translation
-      card
-    end
-
-    def validation_errors_from(body)
-      errors = ActiveModel::Errors.new(@credit_card)
-
-      doc = Hpricot(body)
-      doc.search("transaction>payment_method>errors>error").each do |each|
-        errors.add(each.attributes['attribute'], I18n.t(each.attributes['key']))
-      end
-
-      errors
+      @credit_card = CreditCard.new
+      flash.now[:error] = params[:error]
+      render(:action => :buy_tshirt)
+      true
     end
 
 end

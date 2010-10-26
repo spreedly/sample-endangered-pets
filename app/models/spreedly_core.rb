@@ -29,6 +29,10 @@ class SpreedlyCore
     post_transaction("authorize", payment_method_token, amount, currency_code)
   end
 
+  def self.get_payment_method(token)
+    self.get("/payment_methods/#{token}.xml")
+  end
+
   def self.add_payment_method_url
     "#{config[:core_domain]}/v1/payment_methods"
   end

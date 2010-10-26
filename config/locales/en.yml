@@ -3,7 +3,7 @@
 
 en:
   hello: "Hello world"
-  
+
   errors:
     taken: "has already been taken"
     inclusion: "is not included in the list"
@@ -25,6 +25,6 @@ en:
     less_than_or_equal_to: "must be less than or equal to %{count}"
     odd: "must be odd"
     even: "must be even"
-    
+
     expired: "is expired"
     incorrect_card_type: "is not correct"
