@@ -26,7 +26,11 @@ class TshirtsController < ApplicationController
 
   private
     def set_flash_error(response)
-      flash.now[:error] = response["transaction"]["response"]["message"]
+      if response["errors"]
+        flash.now[:error] = response["errors"].values.first
+      else
+        flash.now[:error] = response["transaction"]["response"]["message"]
+      end
     end
 
     def error_saving_card
