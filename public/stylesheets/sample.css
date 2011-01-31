@@ -1,0 +1,200 @@
+body {
+  	font-family: arial, verdana, san-serif;
+  	font-size: 0.9em;
+  	min-height: 500px;
+  	background-color: #EEE;
+}
+
+
+a {
+  	color: #0097e9;
+}
+
+p {
+	margin:1em 0;
+	line-height: 1.4em;
+}
+
+.header {
+  	margin: 0 0 2em 0;
+  	line-height: 3em;
+  	height: 2.5em;
+  	text-align: center;
+  	background-color: #003f8c;
+  	border-bottom: 1px solid #DDD;
+  	text-shadow: #00295b 0 -1px 0;
+  	color: #FFF;
+}
+
+h1 {
+  	text-shadow: #fff 0px 1px 0;
+  	color: #002644;
+  	font-size: 1.5em;
+  	margin: 1em 0;
+}
+
+.panel {
+  	background-color: #FFF;
+  	padding: 15px 0;
+  	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-box-shadow: 0 2px 3px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.6);
+  	margin-bottom: 1em;
+  	position: relative;
+}
+
+
+h2 {
+  	margin: 1em 0 1.5em 0;
+  	font-size: 1.1em;
+  	font-weight: bold;
+  	color:#666;
+}
+
+
+
+input[type="submit"], a.button, button {
+	padding: 0.6em 1.5em;
+  	background-color: #deff70;
+  	text-decoration: none;
+  	text-transform: uppercase;
+  	font-weight: bold;
+	color: #496b00;
+  	text-shadow: #fff 0px 1px 0;
+  	text-align: center;
+  	margin: 0px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-box-shadow: 0 2px 3px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.6);
+  	border: 1px solid #78a31f;
+  	
+background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(141,204,4)),
+    color-stop(0.8, rgb(201,255,102))
+);
+
+background: -moz-linear-gradient(
+    center bottom,
+    rgb(141,204,4) 0%,
+    rgb(201,255,102) 80%
+);
+
+}
+
+input[type="submit"]:hover, a.button:hover, button:hover {
+background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(141,204,4)),
+    color-stop(0.8, rgb(221,255,122))
+);
+
+background: -moz-linear-gradient(
+    center bottom,
+    rgb(141,204,4) 0%,
+    rgb(221,255,122) 80%
+);
+
+}
+
+input[type="submit"]:active, a.button:active, button:active {
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,0.6);
+  	border: 1px solid #78a31f;
+  	margin-top: 1px;
+  	margin-bottom: -1px;
+}
+
+
+form {
+	padding:0 0 2em 0;
+}
+
+form div {
+  	margin: 0 0 1em 0;
+}
+
+
+label {
+  	display: block;
+  	margin-bottom: 0.5em;
+  	font-weight: bold;
+}
+
+input[type="text"], input[type="password"]  {
+  	font-size: 1.2em;
+  	padding: 0.4em 5px;
+  	width: 90%;
+}
+
+input[type="submit"] {
+	padding: 0.6em 1.5em;
+	font-size: 1em;
+  	text-align: center;
+  	margin-right: 0.5em;
+}
+
+
+
+
+#flash p {
+	text-align:center;
+	margin-bottom:1em;
+}
+
+
+
+.warning {
+	color:#F00;
+}
+
+
+
+.paddedLeft {
+  	padding-left: 25px;
+}
+
+
+.paddedRight {
+  	padding-right: 25px;  	
+}
+
+#errorExplanation {
+  	background-color: #FF9;
+  	padding: 1em;
+  	margin-bottom: 1.5em;
+}
+
+div.field_with_errors {
+	margin: 0px;  	
+}
+
+div.field_with_errors label {
+	color: #F00;
+}
+
+#errorExplanation h2 {
+  	color: #F00;
+  	font-size: 1.1em;
+  	margin:0;
+}
+
+#errorExplanation ul {
+  	list-style-type: disc;
+  	margin: 0 0 1em 2em;
+}
+
+#errorExplanation li {
+  	margin: 0.5em 0;
+}
+
+
+
+
+

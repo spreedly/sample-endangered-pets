@@ -1,7 +1,12 @@
 
+.grid_8.prefix_2.suffix_2
+  %h1
+    = link_to_unless_current "Home", root_url
 
-%br
-%br
-
-= link_to "Buy T-Shirts", buy_tshirt_url
-
+.grid_8.prefix_2.suffix_2
+  .panel.paddedLeft.paddedRight
+    %p
+      Check out the read me file...
+      
+    %p
+      = link_to "Buy T-Shirts", buy_tshirt_url

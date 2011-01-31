@@ -5,16 +5,17 @@
     %meta(http-equiv="Content-type" content="text/html; charset=utf-8")/
     %meta(http-equiv="X-UA-Compatible" content="chrome=1")/
     = javascript_include_tag "application"
-    = stylesheet_link_tag "scaffold", "screen"
+    = stylesheet_link_tag 'reset', 'sample', '960'
 
   %body
-    #nav
-      .content
-        %h1= link_to_unless_current "Spreedly Core Sample", root_url
-
-    #page
-      .content
-        #main
-          = render '/layouts/flash_details'
-          .inner= yield
+    
+    %p.header
+      Spreedly Core Sample App. Visit 
+      = link_to "Spreedlycore.com", "http://spreedlycore.com"
+      for more information.
+    
+    
+    .container_12  
+      = render '/layouts/flash_details'
+      .inner= yield
 
