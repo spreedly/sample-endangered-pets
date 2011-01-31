@@ -29,7 +29,7 @@ class TshirtsController < ApplicationController
       if response["errors"]
         flash.now[:error] = response["errors"].values.first
       else
-        flash.now[:error] = "#{response['transaction']['response']['message']} #{response['transaction']['response']['error_detail']}."
+        flash.now[:error] = "#{response['transaction']['response']['message']} #{response['transaction']['response']['error_detail']}"
       end
     end
 
