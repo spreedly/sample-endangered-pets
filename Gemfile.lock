@@ -75,7 +75,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (= 1.0.2)
   colored (= 1.2)
   haml (= 3.0.18)
   hpricot (= 0.8.2)
