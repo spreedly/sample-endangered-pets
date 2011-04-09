@@ -1,0 +1,11 @@
+Makefile
+*.dSYM
+*.o
+*.bundle
+*.so
+*.a
+*.rbc
+mkmf.log
+pkg/
+tmp
+vendor
