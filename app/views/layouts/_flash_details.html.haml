@@ -1,3 +1,4 @@
--unless flash_value.blank?
-  #flash(class=flash_class)
+- unless flash.empty?
+  #flash
     = flash_value
+

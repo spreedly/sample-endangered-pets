@@ -1,13 +1,9 @@
 module LayoutHelper
-  
-  def flash_class
-    return "" if flash.values.empty?
-    "#{flash.keys.join(' ')}"
-  end
-  
+
   def flash_value
-    return nil if flash.values.join.blank?
-    flash.values.collect { | value | "<p>#{h(value)}</p>"}.join("\n").html_safe
+    flash.collect do |key, value|
+      %{<p class="#{key}">#{value}</p>}
+    end.join("\n").html_safe
   end
-  
+
 end
