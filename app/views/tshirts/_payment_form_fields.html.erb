@@ -1,0 +1,33 @@
+<fieldset>
+  <div class="set">
+    <%= f.label :first_name, nil, :class => :textbox %>
+    <%= f.text_field :first_name, :class => :textbox %>
+  </div>
+
+  <div class="set">
+    <%= f.label :last_name, nil, :class => :textbox %>
+    <%= f.text_field :last_name, :class => :textbox %>
+  </div>
+
+  <div class="set">
+    <%= f.label :number, "Card Number", :class => :textbox %>
+    <%= f.text_field :number, :class => :textbox %>
+  </div>
+
+  <div class="set">
+    <%= f.label :verification_value, "Security Code", :class => :textbox %>
+    <%= f.text_field :verification_value, :class => :textbox %>
+  </div>
+
+  <div class="set">
+    <%= f.label :month, "Expires on", :class => :textbox %>
+    <%= select_month(@credit_card.month, :add_month_numbers => true, :prefix => "credit_card", :field_name => :month) %>
+    <%= select_year(@credit_card.year, :start_year => Date.today.year + 1, :end_year => Date.today.year + 10, :prefix => "credit_card", :field_name => :year) %>
+  </div>
+
+  <br />
+  <div class="set">
+    <%= f.label :how_many, "How many shirts? (4 cents each):", :class => :textbox %>
+    <%= text_field_tag "data[how_many]", @credit_card.how_many, :class => :textbox, :id => "credit_card_how_many" %>
+  </div>
+</fieldset>

@@ -42,7 +42,6 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    haml (3.1.6)
     hike (1.2.1)
     hpricot (0.8.6)
     httparty (0.8.3)
@@ -114,7 +113,6 @@ DEPENDENCIES
   coffee-rails
   colored
   dynamic_form
-  haml
   hpricot
   httparty
   jquery-rails
