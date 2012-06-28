@@ -11,24 +11,22 @@ class CreditCard
     initialize_attributes(core_response['payment_method']) if core_response
   end
 
-
   private
-    def initialize_attributes(attributes = {})
-      attributes.each do |key, value|
-        begin
-          send("#{key}=", value)
-        rescue NoMethodError
-        end
-      end
-      self.how_many = attributes["data"].try(:[], "how_many")
-    end
 
-    def incorporate_errors_from_core
-      doc = Hpricot(@core_response.body)
-      doc.search("payment_method>errors>error").each do |each|
-        errors.add(each.attributes['attribute'], I18n.t(each.attributes['key']))
+  def initialize_attributes(attributes = {})
+    attributes.each do |key, value|
+      begin
+        send("#{key}=", value)
+      rescue NoMethodError
       end
     end
+    self.how_many = attributes["data"].try(:[], "how_many")
+  end
 
-
+  def incorporate_errors_from_core
+    doc = Nokogiri::XML(@core_response.body)
+    doc.search("payment_method>errors>error").each do |each|
+      errors.add(each.attributes['attribute'].to_s, I18n.t(each.attributes['key']))
+    end
+  end
 end

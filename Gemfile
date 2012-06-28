@@ -5,7 +5,7 @@ gem "jquery-rails"
 gem "mysql2"
 gem "httparty"
 gem "colored"
-gem "hpricot"
+gem "nokogiri"
 gem "dynamic_form"
 
 group :assets do
