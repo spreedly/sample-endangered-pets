@@ -6,15 +6,21 @@
 </div>
 
 <div class="grid_8 prefix_2 suffix_2">
-  <div class="panel paddedLeft paddedRight">
-    <h2>Payment Information</h2>
-
-    <%= error_messages_for 'credit_card', :object_name => "credit card" %>
-    <%= form_for @credit_card, :as => :credit_card, :url => SpreedlyCore.add_payment_method_url do |f| %>
+  <div class="paddedLeft paddedRight">
+    <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
       <%= render 'tshirts/hidden_form_fields' %>
-      <%= render 'tshirts/payment_form_fields', :f => f %>
 
-      <button type="submit">Submit Payment</button>
+      <fieldset>
+        <legend>Purchase Details</legend>
+        <div class="set">
+          <%= f.label :how_many, "How many shirts? (4 cents each):", class: :textbox %>
+          <%= f.text_field :how_many, class: :textbox %>
+        </div>
+      </fieldset>
+
+      <% PaymentMethod.each(@payment_method.type) do |e| %>
+        <%= render "tshirts/#{e.underscore}_fields" %>
+      <% end %>
     <% end %>
   </div>
 </div>

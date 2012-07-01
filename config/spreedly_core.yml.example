@@ -1,4 +1,6 @@
 api_login: "OB9909MNZj62u9U4VAz3lAAPZcp"
 api_secret: "MIMo7gJrSi3LnJGdRrOZeBBowXmDVE4zEgyHQS91tIqZiJ2oiy6PRt5XJVXG7hcz"
-gateway_token: "StuXzUJ5Khe3Wes31T0M4uNnjv9"
-core_domain: "https://spreedlycore.com"
+credit_card_gateway_token: "StuXzUJ5Khe3Wes31T0M4uNnjv9"
+offsite_gateways:
+  - token: "StuXzUJ5Khe3Wes31T0M4uNnjv9"
+    name: "Test"

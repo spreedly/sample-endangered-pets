@@ -1,0 +1,37 @@
+<%= fields_for @payment_method.credit_card, as: :credit_card do |f| %>
+  <fieldset>
+    <legend>Pay via Credit Card</legend>
+
+    <%= error_messages_for :credit_card, object_name: "credit card" %>
+
+    <div class="set">
+      <%= f.label :first_name, nil, class: :textbox %>
+      <%= f.text_field :first_name, class: :textbox %>
+    </div>
+
+    <div class="set">
+      <%= f.label :last_name, nil, class: :textbox %>
+      <%= f.text_field :last_name, class: :textbox %>
+    </div>
+
+    <div class="set">
+      <%= f.label :number, "Card Number", class: :textbox %>
+      <%= f.text_field :number, class: :textbox %>
+    </div>
+
+    <div class="set">
+      <%= f.label :verification_value, "Security Code", class: :textbox %>
+      <%= f.text_field :verification_value, class: :textbox %>
+    </div>
+
+    <div class="set">
+      <%= f.label :month, "Expires on", class: :textbox %>
+      <%= select_month(f.object.month, add_month_numbers: true, prefix: "credit_card", field_name: :month) %>
+      <%= select_year(f.object.year, start_year: Date.today.year + 1, end_year: Date.today.year + 10, prefix: "credit_card", field_name: :year) %>
+    </div>
+
+    <div class="set">
+      <button type="submit">Pay via Credit Card</button>
+    </div>
+  </fieldset>
+<% end %>

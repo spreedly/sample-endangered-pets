@@ -1,45 +1,41 @@
-
 class TshirtsController < ApplicationController
-
   def buy_tshirt
-    @credit_card = CreditCard.new
+    @payment_method = PaymentMethod.new
   end
 
   def transparent_redirect_complete
     return if error_saving_card
 
-    @payment_method_token = params[:token]
-    @credit_card = CreditCard.new(SpreedlyCore.get_payment_method(@payment_method_token))
-    return render(:action => :buy_tshirt) unless @credit_card.valid?
+    @payment_method = PaymentMethod.new(SpreedlyCore.get_payment_method(params[:token]))
+    return render(action: :buy_tshirt) unless @payment_method.valid?
 
-    response = SpreedlyCore.purchase(params[:token], 4 * @credit_card.how_many.to_i)
+    response = SpreedlyCore.purchase(@payment_method, 4 * @payment_method.how_many.to_i)
     return redirect_to(successful_purchase_url) if response.code == 200
 
     set_flash_error(response)
-    render(:action => :buy_tshirt)
+    render(action: :buy_tshirt)
   end
-
-  def successful_purchase
-
-  end
-
 
   private
-    def set_flash_error(response)
-      if response["errors"]
-        flash.now[:error] = response["errors"].values.first
-      else
-        flash.now[:error] = "#{response['transaction']['response']['message']} #{response['transaction']['response']['error_detail']}"
-      end
+
+  def set_flash_error(response)
+    if response["errors"]
+      flash.now[:error] = response["errors"].values.first
+    elsif response['transaction']
+      r = response['transaction']['response']
+      flash.now[:error] = "#{r['message']} #{r['error_detail']}"
+    else
+      flash.now[:error] = "Exception from backend"
+      @error = response.body
     end
+  end
 
-    def error_saving_card
-      return false if params[:error].blank?
+  def error_saving_card
+    return false if params[:error].blank?
 
-      @credit_card = CreditCard.new
-      flash.now[:error] = params[:error]
-      render(:action => :buy_tshirt)
-      true
-    end
-
+    @payment_method = PaymentMethod.new
+    flash.now[:error] = params[:error]
+    render(action: :buy_tshirt)
+    true
+  end
 end

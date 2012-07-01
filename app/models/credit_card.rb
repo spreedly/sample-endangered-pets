@@ -1,9 +1,7 @@
 class CreditCard
   include ActiveModel::Validations
 
-  attr_accessor :first_name, :last_name, :card_type, :number, :verification_value, :month, :year, :how_many
-  validates_presence_of :how_many
-  validates_numericality_of :how_many, :only_integer => true
+  attr_accessor :first_name, :last_name, :card_type, :number, :verification_value, :month, :year
   validate :incorporate_errors_from_core
 
   def initialize(core_response = nil)
@@ -20,7 +18,6 @@ class CreditCard
       rescue NoMethodError
       end
     end
-    self.how_many = attributes["data"].try(:[], "how_many")
   end
 
   def incorporate_errors_from_core
