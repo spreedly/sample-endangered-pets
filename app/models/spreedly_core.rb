@@ -18,12 +18,14 @@ class SpreedlyCore
     config[:api_login]
   end
 
-  def self.purchase(payment_method, amount, currency_code="USD")
-    post_transaction("purchase", payment_method, amount, currency_code)
+  def self.purchase(payment_method, amount, options={})
+    options[:amount] = amount
+    post_transaction("purchase", payment_method, options)
   end
 
-  def self.authorize(payment_method, amount, currency_code="USD")
-    post_transaction("authorize", payment_method, amount, currency_code)
+  def self.authorize(payment_method, amount, options={})
+    options[:amount] = amount
+    post_transaction("authorize", payment_method, options)
   end
 
   def self.get_payment_method(token)
@@ -50,8 +52,9 @@ class SpreedlyCore
     end.join('')
   end
 
-  def self.post_transaction(action, payment_method, amount, currency_code="USD")
-    transaction = { amount: amount, currency_code: currency_code, payment_method_token: payment_method.token }
+  def self.post_transaction(action, payment_method, options)
+    options[:currency_code] ||= "USD"
+    transaction = {payment_method_token: payment_method.token}.merge(options)
     self.post("/gateways/#{config[:payment_methods][payment_method.type]}/#{action}.xml", body: self.to_xml_params(transaction: transaction))
   end
 end
