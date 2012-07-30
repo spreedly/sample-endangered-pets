@@ -12,7 +12,7 @@ class TshirtsController < ApplicationController
     @credit_card = CreditCard.new(SpreedlyCore.get_payment_method(@payment_method_token))
     return render(:action => :buy_tshirt) unless @credit_card.valid?
 
-    response = SpreedlyCore.purchase(params[:token], 4 * @credit_card.how_many.to_i)
+    response = SpreedlyCore.purchase(params[:token], (( 12.99 * @credit_card.how_many.to_i ) * 100).to_i )
     return redirect_to(successful_purchase_url) if response.code == 200
 
     set_flash_error(response)
