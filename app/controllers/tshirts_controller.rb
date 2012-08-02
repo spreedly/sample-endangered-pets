@@ -9,7 +9,7 @@ class TshirtsController < ApplicationController
     @payment_method = PaymentMethod.new(SpreedlyCore.get_payment_method(params[:token]))
     return render(action: :buy_tshirt) unless @payment_method.valid?
 
-    response = SpreedlyCore.purchase(@payment_method, 4 * @payment_method.how_many.to_i, redirect_url: successful_purchase_url)
+    response = SpreedlyCore.purchase(@payment_method, ((12.99 * @payment_method.how_many.to_i) * 100).to_i, redirect_url: successful_purchase_url)
     if(response.code == 200)
       if response["transaction"]["succeeded"]
         return redirect_to(successful_purchase_url)
