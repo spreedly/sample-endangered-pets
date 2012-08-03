@@ -52,6 +52,7 @@ GEM
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.7.3)
+    log_buddy (0.6.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -115,6 +116,7 @@ DEPENDENCIES
   dynamic_form
   httparty
   jquery-rails
+  log_buddy
   mysql2
   nokogiri
   rails (~> 3.2.5)

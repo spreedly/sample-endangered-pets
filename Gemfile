@@ -7,6 +7,7 @@ gem "httparty"
 gem "colored"
 gem "nokogiri"
 gem "dynamic_form"
+gem "log_buddy"
 
 group :assets do
   gem "sass-rails"
