@@ -7,11 +7,16 @@ class SpreedlyCore
     @config ||= YAML.load(ERB.new(File.read(config_file)).result).with_indifferent_access
   end
 
+  def self.core_domain
+    config[:core_domain] || "https://spreedlycore.com"
+  end
+
+
   include HTTParty
   headers 'Accept' => 'text/xml'
   headers 'Content-Type' => 'text/xml'
   basic_auth(config[:api_login], config[:api_secret])
-  base_uri("#{(config[:core_domain] || "https://spreedlycore.com")}/v1")
+  base_uri("#{core_domain}/v1")
   format :xml
 
   def self.api_login
@@ -33,7 +38,7 @@ class SpreedlyCore
   end
 
   def self.add_payment_method_url
-    "#{config[:core_domain]}/v1/payment_methods"
+    "#{core_domain}/v1/payment_methods"
   end
 
   private
