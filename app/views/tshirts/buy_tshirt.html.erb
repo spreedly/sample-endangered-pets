@@ -8,6 +8,7 @@
 <div class="grid_8 prefix_2 suffix_2">
   <div class="paddedLeft paddedRight">
     <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
+      <%= error_messages_for object: [ @payment_method, @payment_method.credit_card ] %>
       <%= render 'tshirts/hidden_form_fields' %>
 
       <fieldset>

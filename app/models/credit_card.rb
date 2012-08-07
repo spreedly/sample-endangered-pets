@@ -1,5 +1,6 @@
 class CreditCard
   include ActiveModel::Validations
+  include ActiveModel::Conversion
 
   attr_accessor :first_name, :last_name, :card_type, :number, :verification_value, :month, :year
   validate :incorporate_errors_from_core
@@ -9,8 +10,8 @@ class CreditCard
     initialize_attributes(core_response['payment_method']) if core_response
   end
 
-  private
 
+  private
   def initialize_attributes(attributes = {})
     attributes.each do |key, value|
       begin

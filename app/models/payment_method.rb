@@ -1,5 +1,6 @@
 class PaymentMethod
   include ActiveModel::Validations
+  include ActiveModel::Conversion
 
   attr_accessor :credit_card, :how_many, :type, :token
 
