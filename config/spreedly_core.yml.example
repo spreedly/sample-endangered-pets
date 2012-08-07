@@ -3,4 +3,5 @@ api_secret: "MIMo7gJrSi3LnJGdRrOZeBBowXmDVE4zEgyHQS91tIqZiJ2oiy6PRt5XJVXG7hcz"
 credit_card_gateway_token: "StuXzUJ5Khe3Wes31T0M4uNnjv9"
 payment_methods:
   CreditCard: "8BLQV534EOmJfbMwHfvNVXnuJUl"
-  Sprel: "8BLQV534EOmJfbMwHfvNVXnuJUl"
+  Sprel: "bBLQV336EOmJfbMwHfvNVXnuJUl"
+  Dwolla: "1BLQV532EOmJfbMwHfvNVXnuJUl"
