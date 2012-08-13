@@ -8,6 +8,7 @@ gem "colored"
 gem "nokogiri"
 gem "dynamic_form"
 gem "log_buddy"
+gem "awesome_print"
 
 group :assets do
   gem "sass-rails"
