@@ -10,6 +10,11 @@ gem "dynamic_form"
 gem "log_buddy"
 gem "awesome_print"
 
+group :test, :development do
+  gem 'pry-rails'
+  gem 'pry-debugger'
+end
+
 group :assets do
   gem "sass-rails"
   gem "coffee-rails"
