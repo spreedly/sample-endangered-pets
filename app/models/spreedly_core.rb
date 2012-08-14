@@ -37,6 +37,10 @@ class SpreedlyCore
     self.get("/payment_methods/#{token}.xml")
   end
 
+  def self.get_transaction(token)
+    self.get("/transactions/#{token}.xml")
+  end
+
   def self.add_payment_method_url
     "#{core_domain}/v1/payment_methods"
   end

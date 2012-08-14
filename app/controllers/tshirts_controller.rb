@@ -9,7 +9,7 @@ class TshirtsController < ApplicationController
     @payment_method = PaymentMethod.new(SpreedlyCore.get_payment_method(params[:token]))
     return render(action: :buy_tshirt) unless @payment_method.valid?
 
-    response = SpreedlyCore.purchase(@payment_method, ((12.99 * @payment_method.how_many.to_i) * 100).to_i, redirect_url: successful_purchase_url, callback_url: callback_url)
+    response = SpreedlyCore.purchase(@payment_method, ((12.99 * @payment_method.how_many.to_i) * 100).to_i, redirect_url: offsite_redirect_url, callback_url: offsite_callback_url)
     if(response.code == 200)
       if response["transaction"]["succeeded"]
         return redirect_to(successful_purchase_url)
@@ -22,7 +22,15 @@ class TshirtsController < ApplicationController
     render(action: :buy_tshirt)
   end
 
-  def callback
+  def successful_purchase
+  end
+
+  def offsite_redirect
+    @transaction = Transaction.new(SpreedlyCore.get_transaction(params[:transaction_token]))
+    render text: "NICE"
+  end
+
+  def offsite_callback
     @@transactions_called_back ||= []
     @@transactions_called_back.concat(params[:transactions][:transaction].collect{|t| "#{t[:token]} for #{t[:amount]}: #{t[:message]}"})
     head :ok
@@ -40,7 +48,7 @@ class TshirtsController < ApplicationController
       error = error["__content__"] if error["__content__"]
       flash.now[:error] = error
     elsif response['transaction']
-      r = response['transaction']['response']
+      r = response['transaction']['response'] || response['transaction']['setup_response']
       flash.now[:error] = "#{r['message']} #{r['error_detail']}"
     else
       flash.now[:error] = "Exception from backend"
