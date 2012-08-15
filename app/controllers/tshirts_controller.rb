@@ -4,22 +4,20 @@ class TshirtsController < ApplicationController
   end
 
   def transparent_redirect_complete
-    return if error_saving_card
+    return if error_talking_to_core
 
     @payment_method = PaymentMethod.new(SpreedlyCore.get_payment_method(params[:token]))
     return render(action: :buy_tshirt) unless @payment_method.valid?
 
-    response = SpreedlyCore.purchase(@payment_method, ((12.99 * @payment_method.how_many.to_i) * 100).to_i, redirect_url: offsite_redirect_url, callback_url: offsite_callback_url)
-    if(response.code == 200)
-      if response["transaction"]["succeeded"]
-        return redirect_to(successful_purchase_url)
-      elsif response["transaction"]["pending"]
-        return redirect_to(response["transaction"]["checkout_url"])
-      end
+    response = SpreedlyCore.purchase(@payment_method, amount_to_charge, redirect_url: offsite_redirect_url, callback_url: offsite_callback_url)
+    if response.code == 200
+      return redirect_to(successful_purchase_url)
+    elsif response.code == 202
+      return redirect_to(response["transaction"]["checkout_url"])
+    else
+      set_flash_error(response)
+      render(action: :buy_tshirt)
     end
-
-    set_flash_error(response)
-    render(action: :buy_tshirt)
   end
 
   def successful_purchase
@@ -56,12 +54,16 @@ class TshirtsController < ApplicationController
     end
   end
 
-  def error_saving_card
+  def error_talking_to_core
     return false if params[:error].blank?
 
     @payment_method = PaymentMethod.new
     flash.now[:error] = params[:error]
     render(action: :buy_tshirt)
     true
+  end
+
+  def amount_to_charge
+    ((1.99 * @payment_method.how_many.to_i) * 100).to_i
   end
 end
