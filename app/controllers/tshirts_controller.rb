@@ -25,7 +25,16 @@ class TshirtsController < ApplicationController
 
   def offsite_redirect
     @transaction = Transaction.new(SpreedlyCore.get_transaction(params[:transaction_token]))
-    render text: "NICE"
+    @payment_method = @transaction.payment_method
+    case @transaction.state
+    when "succeeded"
+      redirect_to successful_purchase_url
+    when "gateway_processing_failed"
+      flash[:error] = @transaction.message
+      render :buy_tshirt
+    else
+      raise "Unknown state #{@transaction.state}"
+    end
   end
 
   def offsite_callback
@@ -41,17 +50,8 @@ class TshirtsController < ApplicationController
   private
 
   def set_flash_error(response)
-    if response["errors"]
-      error = response["errors"].values.first
-      error = error["__content__"] if error["__content__"]
-      flash.now[:error] = error
-    elsif response['transaction']
-      r = response['transaction']['response'] || response['transaction']['setup_response']
-      flash.now[:error] = "#{r['message']} #{r['error_detail']}"
-    else
-      flash.now[:error] = "Exception from backend"
-      @error = response.body
-    end
+    transaction = Transaction.new(response)
+    flash.now[:error] = transaction.message + " (#{transaction.state.humanize})"
   end
 
   def error_talking_to_core
