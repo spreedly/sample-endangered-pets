@@ -1,4 +1,6 @@
 class TshirtsController < ApplicationController
+  TSHIRT_AMOUNT = 1.99
+
   def buy_tshirt
     @payment_method = PaymentMethod.new
   end
@@ -10,10 +12,10 @@ class TshirtsController < ApplicationController
     return render(action: :buy_tshirt) unless @payment_method.valid?
 
     response = SpreedlyCore.purchase(@payment_method, amount_to_charge, redirect_url: offsite_redirect_url, callback_url: offsite_callback_url)
-    if response.code == 200
-      return redirect_to(successful_purchase_url)
-    elsif response.code == 202
-      return redirect_to(response["transaction"]["checkout_url"])
+    case response.code
+    when 200, 202
+      return redirect_to(successful_purchase_url) if response.code == 200
+      return redirect_to(Transaction.new(response).checkout_url)
     else
       set_flash_error(response)
       render(action: :buy_tshirt)
@@ -39,7 +41,7 @@ class TshirtsController < ApplicationController
 
   def offsite_callback
     @@transactions_called_back ||= []
-    @@transactions_called_back.concat(params[:transactions][:transaction].collect{|t| "#{t[:token]} for #{t[:amount]}: #{t[:message]}"})
+    @@transactions_called_back.concat(params[:transactions][:transaction].collect{|t| "#{t[:token]} for #{t[:amount]}: #{t[:message]} (#{t[:state]})"})
     head :ok
   end
 
@@ -50,8 +52,11 @@ class TshirtsController < ApplicationController
   private
 
   def set_flash_error(response)
-    transaction = Transaction.new(response)
-    flash.now[:error] = transaction.message + " (#{transaction.state.humanize})"
+    if response["errors"]
+      flash.now[:error] = response["errors"]["error"]["__content__"]
+    else
+      flash.now[:error] = Transaction.new(response).message + " (#{transaction.state.humanize})"
+    end
   end
 
   def error_talking_to_core
@@ -64,6 +69,6 @@ class TshirtsController < ApplicationController
   end
 
   def amount_to_charge
-    ((1.99 * @payment_method.how_many.to_i) * 100).to_i
+    ((TSHIRT_AMOUNT * @payment_method.how_many.to_i) * 100).to_i
   end
 end

@@ -1,5 +1,5 @@
 class Transaction
-  attr_reader :state, :message, :payment_method
+  attr_reader :state, :message, :payment_method, :checkout_url
 
   def initialize(core_response=nil)
     initialize_attributes(core_response["transaction"]) if core_response
@@ -8,6 +8,7 @@ class Transaction
 
   def initialize_attributes(attributes={})
     @state = attributes["state"]
-    @message = attributes["message"]["__content__"]
+    @checkout_url = attributes["checkout_url"]
+    @message = (attributes["message"]["__content__"] || attributes["message"])
   end
 end

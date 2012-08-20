@@ -7,14 +7,12 @@ class CreditCard
 
   def initialize(core_response = nil)
     @core_response = core_response
-    d{core_response}
     initialize_attributes(core_response['payment_method']) if core_response
   end
 
-
   private
+
   def initialize_attributes(attributes = {})
-    d{attributes}
     attributes.each do |key, value|
       begin
         send("#{key}=", value)
