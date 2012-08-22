@@ -1,5 +1,5 @@
 class TshirtsController < ApplicationController
-  TSHIRT_AMOUNT = 1.99
+  TSHIRT_AMOUNT = 0.02
 
   def buy_tshirt
     @payment_method = PaymentMethod.new
@@ -13,8 +13,9 @@ class TshirtsController < ApplicationController
 
     response = SpreedlyCore.purchase(@payment_method, amount_to_charge, redirect_url: offsite_redirect_url, callback_url: offsite_callback_url)
     case response.code
-    when 200, 202
-      return redirect_to(successful_purchase_url) if response.code == 200
+    when 200
+      return redirect_to(successful_purchase_url)
+    when 202
       return redirect_to(Transaction.new(response).checkout_url)
     else
       set_flash_error(response)
@@ -26,6 +27,8 @@ class TshirtsController < ApplicationController
   end
 
   def offsite_redirect
+    return if error_talking_to_core
+
     @transaction = Transaction.new(SpreedlyCore.get_transaction(params[:transaction_token]))
     @payment_method = @transaction.payment_method
     case @transaction.state
