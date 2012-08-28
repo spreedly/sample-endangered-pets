@@ -9,6 +9,10 @@ class Transaction
   def initialize_attributes(attributes={})
     @state = attributes["state"]
     @checkout_url = attributes["checkout_url"]
-    @message = (attributes["message"]["__content__"] || attributes["message"])
+    if @state == "gateway_setup_failed"
+      @message = attributes["setup_response"]["message"]
+    else
+      @message = (attributes["message"]["__content__"] || attributes["message"])
+    end
   end
 end

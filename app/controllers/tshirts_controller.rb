@@ -58,7 +58,8 @@ class TshirtsController < ApplicationController
     if response["errors"]
       flash.now[:error] = response["errors"]["error"]["__content__"]
     else
-      flash.now[:error] = Transaction.new(response).message + " (#{transaction.state.humanize})"
+      t = Transaction.new(response)
+      flash.now[:error] =  "#{t.message} (#{t.state.humanize})"
     end
   end
 
