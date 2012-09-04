@@ -22,6 +22,7 @@ class CreditCard
   end
 
   def incorporate_errors_from_core
+    puts @core_response.body
     doc = Nokogiri::XML(@core_response.body)
     doc.search("payment_method>errors>error").each do |each|
       errors.add(each.attributes['attribute'].to_s, I18n.t(each.attributes['key']))

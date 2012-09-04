@@ -10,7 +10,7 @@ class PaymentMethod
 
   def self.each(current=nil)
     methods = SpreedlyCore.config["payment_methods"].keys
-    methods.unshift(methods.delete("CreditCard"))
+    methods.unshift(methods.delete("credit_card"))
     methods.unshift(methods.delete(current))
     methods.compact!
     methods.each do |m|
@@ -31,7 +31,7 @@ class PaymentMethod
   end
 
   def is_credit_card?
-    (type.blank? || (type == "CreditCard"))
+    (type.blank? || (type == "credit_card"))
   end
 
   def credit_card_is_valid

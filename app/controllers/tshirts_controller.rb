@@ -9,6 +9,7 @@ class TshirtsController < ApplicationController
     return if error_talking_to_core
 
     @payment_method = PaymentMethod.new(SpreedlyCore.get_payment_method(params[:token]))
+    d { @payment_method }
     return render(action: :buy_tshirt) unless @payment_method.valid?
 
     response = SpreedlyCore.purchase(@payment_method, amount_to_charge, redirect_url: offsite_redirect_url, callback_url: offsite_callback_url)
