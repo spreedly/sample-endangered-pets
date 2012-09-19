@@ -5,3 +5,4 @@ payment_methods:
   sprel: "bBLQV336EOmJfbMwHfvNVXnuJUl"
   dwolla: "1BLQV532EOmbfbMwH8vNVXnuJUl"
   paypal: "4rLQV532ErmJfrMwrfvNVXnuJUl"
+  gocardless: "9rrQV332RrmKfrMwbfvWVXnuJUl"
