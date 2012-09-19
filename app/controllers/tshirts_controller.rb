@@ -35,7 +35,7 @@ class TshirtsController < ApplicationController
     when "succeeded"
       redirect_to successful_purchase_url
     when "gateway_processing_failed"
-      flash[:error] = @transaction.message
+      flash.now[:error] = @transaction.message
       render :buy_tshirt
     else
       raise "Unknown state #{@transaction.state}"
