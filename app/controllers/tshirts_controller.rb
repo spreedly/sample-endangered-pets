@@ -26,6 +26,9 @@ class TshirtsController < ApplicationController
   def successful_purchase
   end
 
+  def successful_delayed_purchase
+  end
+
   def offsite_redirect
     return if error_talking_to_core
 
@@ -34,6 +37,8 @@ class TshirtsController < ApplicationController
     case @transaction.state
     when "succeeded"
       redirect_to successful_purchase_url
+    when "processing"
+      redirect_to successful_delayed_purchase_url
     when "gateway_processing_failed"
       flash.now[:error] = @transaction.message
       render :buy_tshirt
