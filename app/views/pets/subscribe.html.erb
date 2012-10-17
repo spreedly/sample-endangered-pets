@@ -1,0 +1,22 @@
+<div class="grid_8 prefix_2 suffix_2">
+  <h1>
+    <%= link_to_unless_current "Home", root_url %>
+    &gt; Endangered Pet of the Month Club
+  </h1>
+</div>
+
+<div class="grid_8 prefix_2 suffix_2">
+  <div class="paddedLeft paddedRight">
+    <p>You can easily sign up to receive one cute and cuddly pet every month.</p>
+    <p>For only $139/month, we'll hand-deliver a new pet with special care and feeding instructions.</p>
+    </br>
+    <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
+      <div class="set">
+        <%= hidden_field_tag :api_login, SpreedlyCore.api_login %>
+        <%= hidden_field_tag :redirect_url, tshirts_transparent_redirect_complete_url %>
+        <%= hidden_field_tag :max_amount, "39.00" %>
+      </div>
+    <% end -%>
+
+  </div>
+</div>

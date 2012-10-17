@@ -9,5 +9,9 @@ CoreSample::Application.routes.draw do
     match :history
   end
 
+  scope(path: "pets", controller: :pets, as: :pets) do
+    match :subscribe
+  end
+
   root to: "home#index"
 end
