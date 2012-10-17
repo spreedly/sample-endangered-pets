@@ -1,11 +1,13 @@
 CoreSample::Application.routes.draw do
-  match "buy_tshirt" => "tshirts#buy_tshirt"
-  match "transparent_redirect_complete" => "tshirts#transparent_redirect_complete"
-  match "successful_purchase" => "tshirts#successful_purchase"
-  match "successful_delayed_purchase" => "tshirts#successful_delayed_purchase"
-  match "offsite_redirect" => "tshirts#offsite_redirect"
-  match "offsite_callback" => "tshirts#offsite_callback", format: :xml
-  match "history" => "tshirts#history"
+  scope(path: "tshirts", controller: :tshirts, as: :tshirts) do
+    match :buy
+    match :transparent_redirect_complete
+    match :successful_purchase
+    match :successful_delayed_purchase
+    match :offsite_redirect
+    match :offsite_callback, format: :xml
+    match :history
+  end
 
   root to: "home#index"
 end
