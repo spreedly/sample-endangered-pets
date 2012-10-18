@@ -13,8 +13,12 @@
     <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
       <div class="set">
         <%= hidden_field_tag :api_login, SpreedlyCore.api_login %>
-        <%= hidden_field_tag :redirect_url, tshirts_transparent_redirect_complete_url %>
-        <%= hidden_field_tag :max_amount, "39.00" %>
+        <%= hidden_field_tag :redirect_url, pets_transparent_redirect_complete_url %>
+        <%= hidden_field_tag 'gocardless[interval_length]', "1" %>
+        <%= hidden_field_tag 'gocardless[interval_unit]', "month" %>
+        <%= hidden_field_tag 'gocardless[name]', "MonthlyExtinctPet" %>
+        <%= hidden_field_tag 'gocardless[description]', "Receive one cute cuddly pet every month" %>
+        <button type="submit" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
       </div>
     <% end -%>
 
