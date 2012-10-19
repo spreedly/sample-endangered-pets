@@ -12,6 +12,8 @@ CoreSample::Application.routes.draw do
   scope(path: "pets", controller: :pets, as: :pets) do
     match :subscribe
     match :transparent_redirect_complete
+    match :successful_authorize
+    match :successful_delayed_authorize
     match :offsite_redirect
     match :offsite_callback, format: :xml
   end
