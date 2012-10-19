@@ -1,21 +1,22 @@
 CoreSample::Application.routes.draw do
   scope(path: "tshirts", controller: :tshirts, as: :tshirts) do
     match :buy
-    match :transparent_redirect_complete
-    match :successful_purchase
-    match :successful_delayed_purchase
-    match :offsite_redirect
-    match :offsite_callback, format: :xml
-    match :history
+    get :transparent_redirect_complete
+    get :successful_purchase
+    get :successful_delayed_purchase
+    get :offsite_redirect
+    get :offsite_callback, format: :xml
+    get :history
   end
 
   scope(path: "pets", controller: :pets, as: :pets) do
     match :subscribe
-    match :transparent_redirect_complete
-    match :successful_authorize
-    match :successful_delayed_authorize
-    match :offsite_redirect
-    match :offsite_callback, format: :xml
+    get :transparent_redirect_complete
+    get :successful_authorize
+    get :successful_delayed_authorize
+    get :offsite_redirect
+    get :offsite_callback, format: :xml
+    put :initiate_charge
   end
 
   root to: "home#index"
