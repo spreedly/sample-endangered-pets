@@ -19,5 +19,6 @@ CoreSample::Application.routes.draw do
     put :initiate_charge
   end
 
+  get 'admin' => 'admin#index'
   root to: "home#index"
 end
