@@ -1,5 +1,7 @@
 api_login: "OB9909MNZj62u9U4VAz3lAAPZcp"
 api_secret: "MIMo7gJrSi3LnJGdRrOZeBBowXmDVE4zEgyHQS91tIqZiJ2oiy6PRt5XJVXG7hcz"
+
+# The gateway token for each payment method type
 payment_methods:
   credit_card: "8BLQV534EOmJfbMwHfvNVXnuJUl"
   sprel: "bBLQV336EOmJfbMwHfvNVXnuJUl"

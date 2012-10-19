@@ -7,10 +7,9 @@ cp config/database.yml.example config/database.yml
 rake db:create:all
 rake db:schema:load
 cp config/spreedly_core.yml.example config/spreedly_core.yml
-use curl to create a gateway on Spreedly Core
-Remember the gateway token.
-Adjust the config/spreedly_core.yml with the details of your gateway token.
+use curl to create gateways on Spreedly Core
+Remember the gateway tokens.
+Adjust the config/spreedly_core.yml with the details of your gateway tokens.
 
-rails server
-signup for an account
+`rails server`
 
