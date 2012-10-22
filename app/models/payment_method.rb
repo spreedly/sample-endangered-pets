@@ -1,8 +1,6 @@
-class PaymentMethod
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-
-  attr_accessor :credit_card, :how_many, :type, :token
+class PaymentMethod < ActiveRecord::Base
+  attr_accessor :how_many, :type
+  attr_writer   :credit_card
 
   validates_presence_of :how_many
   validates_numericality_of :how_many, only_integer: true, allow_nil: true
@@ -18,16 +16,15 @@ class PaymentMethod
     end
   end
 
-  def initialize(core_response=nil)
-    @credit_card = CreditCard.new(core_response)
-    initialize_attributes(core_response["payment_method"]) if core_response
-  end
+  def self.new_from_core_response(response)
+    payment_method = PaymentMethod.new
+    payment_method.credit_card = CreditCard.new(response)
 
-  def initialize_attributes(attributes={})
-    attributes ||= {}
-    self.token = attributes["token"]
-    self.type = attributes["payment_method_type"]
-    self.how_many = attributes["data"].try(:[], "how_many")
+    attributes = response["payment_method"]
+    payment_method.token = attributes["token"]
+    payment_method.type = attributes["payment_method_type"]
+    payment_method.how_many = attributes["data"].try(:[], "how_many")
+    payment_method
   end
 
   def is_credit_card?
@@ -36,5 +33,9 @@ class PaymentMethod
 
   def credit_card_is_valid
     errors.add(:base, "Invalid credit card") unless credit_card.valid?
+  end
+
+  def credit_card
+    @credit_card ||= CreditCard.new
   end
 end

@@ -12,7 +12,7 @@ class TshirtsController < ApplicationController
   def transparent_redirect_complete
     return if error_talking_to_core
 
-    @payment_method = PaymentMethod.new(SpreedlyCore.get_payment_method(params[:token]))
+    @payment_method = PaymentMethod.new_from_core_response(SpreedlyCore.get_payment_method(params[:token]))
     return render(action: :buy) unless @payment_method.valid?
 
     response = SpreedlyCore.purchase(@payment_method, amount_to_charge, redirect_url: tshirts_offsite_redirect_url, callback_url: tshirts_offsite_callback_url)

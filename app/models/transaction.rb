@@ -3,7 +3,7 @@ class Transaction
 
   def initialize(core_response=nil)
     initialize_attributes(core_response["transaction"]) if core_response
-    @payment_method = PaymentMethod.new(core_response["transaction"])
+    @payment_method = PaymentMethod.new_from_core_response(core_response["transaction"])
   end
 
   def initialize_attributes(attributes={})
