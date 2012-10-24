@@ -6,9 +6,10 @@ class PetsController < ApplicationController
 
   def transparent_redirect_complete
     @payment_method = PaymentMethod.new_from_core_response(SpreedlyCore.get_payment_method(params[:token]))
+    @payment_method.recurring = true
 
     response = SpreedlyCore.authorize(@payment_method, amount_to_charge, redirect_url: pets_offsite_redirect_url, callback_url: pets_offsite_callback_url)
-    # return render(action: :subscribe) unless @payment_method.valid?
+    return render(action: :subscribe) unless @payment_method.save
 
     d { @payment_method }
     case response.code

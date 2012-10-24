@@ -19,6 +19,11 @@
         <%= hidden_field_tag 'gocardless[interval_unit]', "month" %>
         <%= hidden_field_tag 'gocardless[name]', "MonthlyExtinctPet" %>
         <%= hidden_field_tag 'gocardless[description]', "Receive one cute cuddly pet every month" %>
+
+        <%= f.label :email, "Email address", class: :textbox %>
+        <%= f.text_field :email, class: :textbox %>
+
+        <br/><br/><br/>
         <button type="submit" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
       </div>
     <% end -%>
