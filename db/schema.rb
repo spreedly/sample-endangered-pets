@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022144734) do
+ActiveRecord::Schema.define(:version => 20121023215006) do
 
   create_table "payment_methods", :force => true do |t|
     t.string   "email"
@@ -19,5 +19,7 @@ ActiveRecord::Schema.define(:version => 20121022144734) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "payment_methods", ["token"], :name => "index_payment_methods_on_token"
 
 end

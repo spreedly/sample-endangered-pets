@@ -9,16 +9,28 @@
   <div class="panel paddedLeft paddedRight">
     <p>
       This is the fake admin area.  If we were doing this for real, we'd want to have an ability for customers to login
-      and have their remembered payment method associated with their account.  The goal of this demo though is to simply
+      and have their remembered payment method associated with their account.
+    </p>
+
+    <p>
+      The goal of this demo though is to simply
       illustrate how to charge against a previously saved GoCardless pre-authorization.  To simplify things for the demo
       we just remember the payment methods and their associated email address.
     </p>
+
     <p>
-      Here are the payments methods we've saved when someone signed up for our Endangered Pet of the Month Club:
+      Here are the email addresses of the people who have signed up for our Endangered Pet of the Month Club:
     </p>
 
     <ul>
+      <% for payment_method in PaymentMethod.all -%>
+        <li>
+          <%= payment_method.email %>
+          <%= link_to "Charge $50.00", initiate_charge_url(payment_method.token), method: :post %>
 
+        </li>
+
+      <% end -%>
     </ul>
   </div>
 </div>

@@ -16,9 +16,10 @@ CoreSample::Application.routes.draw do
     get :successful_delayed_authorize
     get :offsite_redirect
     get :offsite_callback, format: :xml
-    put :initiate_charge
   end
 
-  get 'admin' => 'admin#index'
+  get  'admin' => 'admin#index'
+  post 'admin/payment_methods/:token/initate_charge' => 'admin#initiate_charge', as: :initiate_charge
+
   root to: "home#index"
 end
