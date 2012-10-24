@@ -1,5 +1,5 @@
 class PaymentMethod < ActiveRecord::Base
-  attr_accessor :how_many, :type, :recurring
+  attr_accessor :how_many, :recurring
   attr_writer   :credit_card
 
   validates_presence_of :how_many, unless: :recurring
@@ -23,14 +23,14 @@ class PaymentMethod < ActiveRecord::Base
 
     attributes = response["payment_method"]
     payment_method.token = attributes["token"]
-    payment_method.type = attributes["payment_method_type"]
+    payment_method.payment_method_type = attributes["payment_method_type"]
     payment_method.how_many = attributes["data"].try(:[], "how_many")
     payment_method.email = attributes["data"].try(:[], "email")
     payment_method
   end
 
   def is_credit_card?
-    (type.blank? || (type == "credit_card"))
+    (payment_method_type.blank? || (payment_method_type == "credit_card"))
   end
 
   def credit_card_is_valid

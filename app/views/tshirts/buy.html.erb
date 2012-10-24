@@ -19,7 +19,7 @@
         </div>
       </fieldset>
 
-      <% PaymentMethod.each(@payment_method.type) do |e| %>
+      <% PaymentMethod.each(@payment_method.payment_method_type) do |e| %>
         <%= render "tshirts/#{e.underscore}_fields" %>
       <% end %>
     <% end %>
