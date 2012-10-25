@@ -8,13 +8,10 @@ class PetsController < ApplicationController
     @payment_method = PaymentMethod.new_from_core_response(SpreedlyCore.get_payment_method(params[:token]))
     @payment_method.recurring = true
 
-    response = SpreedlyCore.authorize(@payment_method, amount_to_charge, redirect_url: pets_offsite_redirect_url, callback_url: pets_offsite_callback_url)
+    response = SpreedlyCore.authorize(@payment_method, amount_to_authorize, redirect_url: pets_offsite_authorize_redirect_url, callback_url: pets_offsite_callback_url)
     return render(action: :subscribe) unless @payment_method.save
 
-    d { @payment_method }
     case response.code
-    when 200
-      return redirect_to(pets_successful_purchase_url)
     when 202
       return redirect_to(Transaction.new(response).checkout_url)
     else
@@ -23,14 +20,28 @@ class PetsController < ApplicationController
     end
   end
 
-  def offsite_redirect
+  def initiate_charge
+    @payment_method = PaymentMethod.find_by_token!(params[:token])
+    response = SpreedlyCore.purchase(@payment_method, amount_to_charge , redirect_url: pets_offsite_purchase_redirect_url, callback_url: pets_offsite_callback_url)
+
+    case response.code
+    when 202
+      return redirect_to(Transaction.new(response).checkout_url)
+    else
+      set_flash_error(response)
+      render(action: :buy)
+    end
+
+    redirect_to admin_url
+  end
+
+
+  def offsite_authorize_redirect
     return if error_talking_to_core
 
     @transaction = Transaction.new(SpreedlyCore.get_transaction(params[:transaction_token]))
     @payment_method = @transaction.payment_method
     case @transaction.state
-    when "succeeded"
-      redirect_to pets_successful_authorize_url
     when "processing"
       redirect_to pets_successful_delayed_authorize_url
     when "gateway_processing_failed"
@@ -41,19 +52,29 @@ class PetsController < ApplicationController
     end
   end
 
-  def offsite_callback
+  def offsite_purchase_redirect
+    return if error_talking_to_core
+
+    @transaction = Transaction.new(SpreedlyCore.get_transaction(params[:transaction_token]))
   end
 
-  def successful_authorize
+  def offsite_callback
   end
 
   def successful_delayed_authorize
   end
 
+  def successful_delayed_purchase
+  end
+
 
   private
-  def amount_to_charge
+  def amount_to_authorize
     139 * 100
+  end
+
+  def amount_to_charge
+    50 * 100
   end
 
   def set_flash_error(response)

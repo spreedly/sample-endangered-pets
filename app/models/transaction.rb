@@ -1,5 +1,5 @@
 class Transaction
-  attr_reader :state, :message, :payment_method, :checkout_url
+  attr_reader :state, :message, :payment_method, :checkout_url, :reference
 
   def initialize(core_response=nil)
     initialize_attributes(core_response["transaction"]) if core_response
@@ -9,6 +9,7 @@ class Transaction
   def initialize_attributes(attributes={})
     @state = attributes["state"]
     @checkout_url = attributes["checkout_url"]
+    @reference = attributes["reference"]
     if @state == "gateway_setup_failed"
       @message = attributes["setup_response"]["message"]
     else
