@@ -26,13 +26,12 @@ class PetsController < ApplicationController
 
     case response.code
     when 202
-      return redirect_to(Transaction.new(response).checkout_url)
+      return redirect_to admin_url, notice: "Charge successful.  The funds will be transferred soon."
     else
       set_flash_error(response)
-      render(action: :buy)
+      render(template: 'admin/index')
     end
 
-    redirect_to admin_url
   end
 
 
