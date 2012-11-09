@@ -51,13 +51,14 @@ class PetsController < ApplicationController
     end
   end
 
-  def offsite_purchase_redirect
-    return if error_talking_to_core
-
-    @transaction = Transaction.new(SpreedlyCore.get_transaction(params[:transaction_token]))
+  def offsite_callback
+    @@transactions_called_back ||= []
+    @@transactions_called_back.concat(params[:transactions][:transaction].collect{|t| "#{t[:token]} for #{t[:amount]}: #{t[:message]} (#{t[:state]})"})
+    head :ok
   end
 
-  def offsite_callback
+  def history
+    @transactions = (defined?(@@transactions_called_back) ? @@transactions_called_back : [])
   end
 
   def successful_delayed_authorize

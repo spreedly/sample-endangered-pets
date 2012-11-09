@@ -15,8 +15,8 @@ CoreSample::Application.routes.draw do
     get :successful_delayed_authorize
     get :successful_delayed_purchase
     get :offsite_authorize_redirect
-    get :offsite_purchase_redirect
     get :offsite_callback, format: :xml
+    get :history
   end
 
   get  'admin' => 'admin#index'
