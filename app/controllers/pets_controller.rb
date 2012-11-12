@@ -42,7 +42,7 @@ class PetsController < ApplicationController
     @transaction = Transaction.new(SpreedlyCore.get_transaction(params[:transaction_token]))
     @payment_method = @transaction.payment_method
     case @transaction.state
-    when "processing"
+    when "processing", "succeeded"
       redirect_to pets_successful_delayed_authorize_url
     when "gateway_processing_failed"
       flash.now[:error] = @transaction.message
