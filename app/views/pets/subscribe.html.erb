@@ -24,7 +24,19 @@
         <%= f.text_field :email, class: :textbox %>
 
         <br/><br/><br/>
-        <button type="submit" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
+
+        <div class="set">
+          <button type="submit" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
+        </div>
+
+        or
+        <br/>
+        <br/>
+
+        <div class="set">
+          <button type="submit" name="payment_method_type" value="sprel">Pay via Sprel</button>
+        </div>
+
       </div>
     <% end -%>
 

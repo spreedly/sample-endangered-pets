@@ -46,7 +46,7 @@ class PetsController < ApplicationController
       redirect_to pets_successful_delayed_authorize_url
     when "gateway_processing_failed"
       flash.now[:error] = @transaction.message
-      render :buy
+      render :subscribe
     else
       raise "Unknown state #{@transaction.state}"
     end
