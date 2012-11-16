@@ -1,18 +1,14 @@
-<div class="grid_8 prefix_2 suffix_2">
-  <h1>
-    <%= link_to_unless_current "Home", root_url %>
-    &gt; Whooo Hooo!
-  </h1>
-</div>
+<div class="container">
+  <div class="page-header">
+    <h1>Whooo Hooo!</h1>
+    <h2>
+      <small>You have successfully made a purchase.  Well done.</small>
+    </h2>
 
-<div class="grid_8 prefix_2 suffix_2">
-  <div class="panel paddedLeft paddedRight">
-    <p>
-      You have successfully made a purchase.  Well done.
-    </p>
-
-    <p>
-      <%= link_to "Make another purchase!", buy_tshirt_url %>
-    </p>
   </div>
+
+  <p class="lead">
+    <%= link_to "Make another purchase", buy_tshirt_url %>
+  </p>
+
 </div>

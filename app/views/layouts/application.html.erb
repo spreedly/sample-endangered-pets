@@ -1,23 +1,37 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Spreedly Core Sample</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
     <%= javascript_include_tag "application" %>
     <%= stylesheet_link_tag 'application' %>
   </head>
   <body>
-    <p class="header">
-      Spreedly Core Sample App. Visit
-      <%= link_to "Spreedlycore.com", "https://spreedlycore.com" %>
-      for more information.
-    </p>
-
-    <div class="container_12">
-      <%= render '/layouts/flash_details' %>
-      <div class="inner">
-        <%= yield %>
-      </div>
+    <header class="navbar navbar-fixed-top">
+      <nav class="navbar-inner">
+        <div class="container">
+          <a href="/" class="brand">Spreedly Core Sample App</a>
+          <ul class="nav">
+            <li>
+              <%= link_to "Buy TShirts", buy_tshirt_url %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <%= render '/layouts/messages' %>
+    <%= yield %>
+    <div class="container">
+      <hr/>
+      <footer>
+        <p>
+          <small>
+            © 2012 <%= link_to "Spreedly", "https://spreedlycore.com" %> Corporation.  All rights reserved.
+          </small>
+        </p>
+      </footer>
     </div>
   </body>
 </html>

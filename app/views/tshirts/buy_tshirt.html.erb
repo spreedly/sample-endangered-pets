@@ -1,20 +1,18 @@
-<div class="grid_8 prefix_2 suffix_2">
-  <h1>
-    <%= link_to_unless_current "Home", root_url %>
-    &gt; Buy TShirts
-  </h1>
-</div>
+<div class="container">
+  <div class="page-header">
+    <h1>Buy TShirts</h1>
+    <h2>
+      <small>For only 2 cents a piece!</small>
+    </h2>
 
-<div class="grid_8 prefix_2 suffix_2">
-  <div class="panel paddedLeft paddedRight">
-    <h2>Payment Information</h2>
-
-    <%= error_messages_for 'credit_card', :object_name => "credit card" %>
-    <%= form_for @credit_card, :as => :credit_card, :url => SpreedlyCore.add_payment_method_url do |f| %>
-      <%= render 'tshirts/hidden_form_fields' %>
-      <%= render 'tshirts/payment_form_fields', :f => f %>
-
-      <button type="submit">Submit Payment</button>
-    <% end %>
   </div>
+
+  <%= error_messages_for 'credit_card', :object_name => "credit card" %>
+  <%= form_for @credit_card, :as => :credit_card, :url => SpreedlyCore.add_payment_method_url do |f| %>
+    <%= render 'tshirts/hidden_form_fields' %>
+    <%= render 'tshirts/payment_form_fields', :f => f %>
+
+    <button type="submit" class="btn btn-primary">Purchase</button>
+  <% end %>
+
 </div>

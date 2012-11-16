@@ -8,6 +8,7 @@ gem "httparty"
 gem "colored"
 gem "nokogiri"
 gem "dynamic_form"
+gem 'bootstrap-sass'
 
 group :assets do
   gem "sass-rails"

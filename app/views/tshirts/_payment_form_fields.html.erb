@@ -1,33 +1,21 @@
-<fieldset>
-  <div class="set">
-    <%= f.label :first_name, nil, :class => :textbox %>
-    <%= f.text_field :first_name, :class => :textbox %>
+<div class="control-group">
+  <div class="controls">
+    <%= f.text_field :first_name, placeholder: "First Name", class: "input-medium" %>
+    <%= f.text_field :last_name, placeholder: "Last Name", class: "input-medium" %>
   </div>
 
-  <div class="set">
-    <%= f.label :last_name, nil, :class => :textbox %>
-    <%= f.text_field :last_name, :class => :textbox %>
+
+  <div class="controls">
+    <%= f.text_field :number, placeholder: "Card Number", class: "input-medium" %>
+    <%= f.text_field :verification_value, placeholder: "CVV", class: "input-mini" %>
   </div>
 
-  <div class="set">
-    <%= f.label :number, "Card Number", :class => :textbox %>
-    <%= f.text_field :number, :class => :textbox %>
+  <div class="controls">
+    <%= f.text_field :month, placeholder: "Expiration Month", class: "input-medium" %>
+    <%= f.text_field :year, placeholder: "Expiration Year", class: "input-medium" %>
   </div>
 
-  <div class="set">
-    <%= f.label :verification_value, "Security Code", :class => :textbox %>
-    <%= f.text_field :verification_value, :class => :textbox %>
+  <div class="controls">
+    <%= text_field_tag "data[how_many]", @credit_card.how_many, :id => "credit_card_how_many", placeholder: "# of Shirts", class: "input-small" %>
   </div>
-
-  <div class="set">
-    <%= f.label :month, "Expires on", :class => :textbox %>
-    <%= select_month(@credit_card.month, :add_month_numbers => true, :prefix => "credit_card", :field_name => :month) %>
-    <%= select_year(@credit_card.year, :start_year => Date.today.year + 1, :end_year => Date.today.year + 10, :prefix => "credit_card", :field_name => :year) %>
-  </div>
-
-  <br />
-  <div class="set">
-    <%= f.label :how_many, "How many shirts? ($12.99 each):", :class => :textbox %>
-    <%= text_field_tag "data[how_many]", @credit_card.how_many, :class => :textbox, :id => "credit_card_how_many" %>
-  </div>
-</fieldset>
+</div>
