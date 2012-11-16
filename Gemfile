@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem "rails", "~> 3.2.5"
+ruby "1.9.3"
+gem 'rails', '3.2.8'
 gem "jquery-rails"
 gem "mysql2"
 gem "httparty"
