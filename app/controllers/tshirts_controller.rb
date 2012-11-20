@@ -5,6 +5,7 @@ class TshirtsController < ApplicationController
 
   def buy
     @payment_method = PaymentMethod.new
+    @paying_with_credit_card = false
   end
 
   def tshirt_club
@@ -15,6 +16,7 @@ class TshirtsController < ApplicationController
     return if error_talking_to_core
 
     @payment_method = PaymentMethod.new_from_core_response(SpreedlyCore.get_payment_method(params[:token]))
+    @paying_with_credit_card = @payment_method.payment_method_type == 'credit_card'
     return render(action: :buy) unless @payment_method.valid?
 
     response = SpreedlyCore.purchase(@payment_method, amount_to_charge, redirect_url: tshirts_offsite_redirect_url, callback_url: tshirts_offsite_callback_url)
