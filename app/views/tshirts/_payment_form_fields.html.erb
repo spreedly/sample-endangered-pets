@@ -19,7 +19,7 @@
       </div>
 
       <div class="span2">
-        <%= f.label :cvv, "CVV" %>
+        <%= f.label :verification_value, "CVV" %>
         <%= f.text_field :verification_value, class: "span12" %>
       </div>
     </div>
@@ -37,7 +37,7 @@
 
     <div class="row-fluid">
       <div class="span2">
-        <%= label_tag "data[how_many]", "# of Shirts" %>
+        <%= label_tag "credit_card_how_many", "# of Shirts" %>
         <%= text_field_tag "data[how_many]", @credit_card.how_many, :id => "credit_card_how_many", class: "span12" %>
       </div>
     </div>
