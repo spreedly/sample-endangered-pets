@@ -10,6 +10,7 @@ gem "nokogiri"
 gem "dynamic_form"
 gem "log_buddy"
 gem "awesome_print"
+gem 'bootstrap-sass'
 
 group :test, :development do
   gem 'pry-rails'

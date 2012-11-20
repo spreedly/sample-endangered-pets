@@ -1,35 +1,40 @@
 <%= fields_for @payment_method.credit_card, as: :credit_card do |f| %>
-  <fieldset>
-    <legend>Pay via Credit Card</legend>
-
-    <div class="set">
-      <%= f.label :first_name, nil, class: :textbox %>
-      <%= f.text_field :first_name, class: :textbox %>
+  <div class="row-fluid">
+    <div class="span3">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: "span12" %>
     </div>
 
-    <div class="set">
-      <%= f.label :last_name, nil, class: :textbox %>
-      <%= f.text_field :last_name, class: :textbox %>
+    <div class="span3">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "span12" %>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span3">
+      <%= f.label :number, "Card Number" %>
+      <%= f.text_field :number, class: "span12" %>
     </div>
 
-    <div class="set">
-      <%= f.label :number, "Card Number", class: :textbox %>
-      <%= f.text_field :number, class: :textbox %>
+    <div class="span2">
+      <%= f.label :verification_value, "CVV" %>
+      <%= f.text_field :verification_value, class: "span12" %>
     </div>
+  </div>
 
-    <div class="set">
-      <%= f.label :verification_value, "Security Code", class: :textbox %>
-      <%= f.text_field :verification_value, class: :textbox %>
+  <div class="row-fluid">
+    <div class="span3">
+      <%= f.label :month, "Expiration" %>
+      <%= f.text_field :month, placeholder: "Month", class: "span12" %>
     </div>
+    <div class="span2">
+      <%= f.label :year, "&nbsp;".html_safe %>
+      <%= f.text_field :year, placeholder: "Year", class: "span12" %>
+    </div>
+  </div>
 
-    <div class="set">
-      <%= f.label :month, "Expires on", class: :textbox %>
-      <%= select_month(f.object.month, add_month_numbers: true, prefix: "credit_card", field_name: :month) %>
-      <%= select_year(f.object.year, start_year: Date.today.year + 1, end_year: Date.today.year + 10, prefix: "credit_card", field_name: :year) %>
-    </div>
-
-    <div class="set">
-      <button type="submit">Pay via Credit Card</button>
-    </div>
-  </fieldset>
+  <br/>
+  <button type="submit" class="btn">Pay via Credit Card</button>
 <% end %>
+

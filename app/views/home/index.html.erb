@@ -1,14 +1,16 @@
-<div class="grid_8 prefix_2 suffix_2">
-  <h1><%= link_to_unless_current "Home", root_url %></h1>
-</div>
-
-<div class="grid_8 prefix_2 suffix_2">
-  <div class="panel paddedLeft paddedRight">
-    <p>For more information about this site, you can check out the <%= link_to 'read me file', 'https://github.com/spreedly/core_sample/blob/master/README' %>.</p>
-
-    <br/>
-    <p><%= link_to "Buy T-Shirts", tshirts_buy_url %></p>
-    <p><%= link_to "Endangered Pet of the Month Club", pets_subscribe_url %></p>
-    <p><%= link_to "Admin", admin_url %></p>
+<div class="container">
+  <div class="page-header">
+    <h1>Home</h1>
   </div>
+
+  <p class="lead">
+    <%= link_to "Buy T-Shirts", tshirts_buy_url %>
+  </p>
+  <p class="lead">
+    <%= link_to "Endangered Pet of the Month Club", pets_subscribe_url %>
+  </p>
+  <p class="lead">
+    <%= link_to "Admin", admin_url %>
+  </p>
+
 </div>

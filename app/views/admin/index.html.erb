@@ -1,36 +1,36 @@
-<div class="grid_8 prefix_2 suffix_2">
-  <h1>
-    <%= link_to_unless_current "Home", root_url %>
-    &gt; Admin
-  </h1>
-</div>
+<div class="container">
+  <div class="page-header">
+    <h1>Admin</h1>
+    <h2>
+      <small>
+        <p>
+          If we were doing this for real, we'd want to have an ability for customers to login
+          and have their remembered payment method associated with their account.
+        </p>
+        <p>
+          The goal of this demo though is to simply illustrate how to charge against a previously saved GoCardless
+          pre-authorization.
+        </p>
+        <p>
+          To simplify things for the demo we just remember the payment methods and their associated email address.
+        </p>
+      </small>
+    </h2>
 
-<div class="grid_8 prefix_2 suffix_2">
-  <div class="panel paddedLeft paddedRight">
-    <p>
-      This is the fake admin area.  If we were doing this for real, we'd want to have an ability for customers to login
-      and have their remembered payment method associated with their account.
-    </p>
-
-    <p>
-      The goal of this demo though is to simply
-      illustrate how to charge against a previously saved GoCardless pre-authorization.  To simplify things for the demo
-      we just remember the payment methods and their associated email address.
-    </p>
-
-    <p>
-      Here are the email addresses of the people who have signed up for our Endangered Pet of the Month Club:
-    </p>
-
-    <ul>
-      <% for payment_method in PaymentMethod.all -%>
-        <li>
-          <%= payment_method.email %>
-          <%= link_to "Charge $50.00", initiate_charge_url(payment_method.token), method: :post %>
-
-        </li>
-
-      <% end -%>
-    </ul>
   </div>
+
+  <p>
+    Here are the email addresses of the people who have signed up for our Endangered Pet of the Month Club:
+  </p>
+
+  <ul>
+    <% for payment_method in PaymentMethod.all -%>
+      <li>
+        <%= payment_method.email %>
+        <%= link_to "Charge $50.00", initiate_charge_url(payment_method.token), method: :post %>
+
+      </li>
+
+    <% end -%>
+  </ul>
 </div>

@@ -1,44 +1,41 @@
-<div class="grid_8 prefix_2 suffix_2">
-  <h1>
-    <%= link_to_unless_current "Home", root_url %>
-    &gt; Endangered Pet of the Month Club
-  </h1>
-</div>
-
-<div class="grid_8 prefix_2 suffix_2">
-  <div class="paddedLeft paddedRight">
-    <p>You can easily sign up to receive one cute and cuddly pet every month.</p>
-    <p>For only $139/month, we'll hand-deliver a new pet with special care and feeding instructions.</p>
-    </br>
-    <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
-      <%= error_messages_for object: [ @payment_method ] %>
-      <div class="set">
-        <%= hidden_field_tag :api_login, SpreedlyCore.api_login %>
-        <%= hidden_field_tag :redirect_url, pets_transparent_redirect_complete_url %>
-        <%= hidden_field_tag 'gocardless[interval_length]', "1" %>
-        <%= hidden_field_tag 'gocardless[interval_unit]', "month" %>
-        <%= hidden_field_tag 'gocardless[name]', "Monthly Extinct Pet" %>
-        <%= hidden_field_tag 'gocardless[description]', "Receive one cute cuddly pet every month" %>
-
-        <%= f.label :email, "Email address", class: :textbox %>
-        <%= f.text_field :email, class: :textbox %>
-
-        <br/><br/><br/>
-
-        <div class="set">
-          <button type="submit" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
-        </div>
-
-        or
-        <br/>
-        <br/>
-
-        <div class="set">
-          <button type="submit" name="payment_method_type" value="sprel">Pay via Sprel</button>
-        </div>
-
-      </div>
-    <% end -%>
+<div class="container">
+  <div class="page-header">
+    <h1>Endangered Pet of the Month Club</h1>
+    <h2>
+      <small>
+        <p>
+          You can easily sign up to receive one cute and cuddly pet every month.
+        </p>
+        <p>
+          For only $139/month, we'll hand-deliver a new pet with special care and feeding instructions.
+        </p>
+      </small>
+    </h2>
 
   </div>
+
+  <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
+    <%= error_messages_for object: [ @payment_method ] %>
+    <div class="set">
+      <%= hidden_field_tag :api_login, SpreedlyCore.api_login %>
+      <%= hidden_field_tag :redirect_url, pets_transparent_redirect_complete_url %>
+      <%= hidden_field_tag 'gocardless[interval_length]', "1" %>
+      <%= hidden_field_tag 'gocardless[interval_unit]', "month" %>
+      <%= hidden_field_tag 'gocardless[name]', "Monthly Extinct Pet" %>
+      <%= hidden_field_tag 'gocardless[description]', "Receive one cute cuddly pet every month" %>
+
+      <%= f.text_field :email, placeholder: "Email Address" %>
+
+      <br/><br/>
+      <button type="submit" class="btn" name="payment_method_type" value="sprel">Pay via Sprel</button>
+      &nbsp;
+      or
+      &nbsp;
+      <button type="submit" class="btn" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
+
+
+
+    </div>
+  <% end -%>
+
 </div>
