@@ -1,21 +1,45 @@
-<div class="control-group">
-  <div class="controls">
-    <%= f.text_field :first_name, placeholder: "First Name", class: "input-medium" %>
-    <%= f.text_field :last_name, placeholder: "Last Name", class: "input-medium" %>
-  </div>
+<div class="row-fluid">
+  <div class="span8">
+    <div class="row-fluid">
+      <div class="span3">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: "span12" %>
+      </div>
 
+      <div class="span3">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "span12" %>
+      </div>
+    </div>
 
-  <div class="controls">
-    <%= f.text_field :number, placeholder: "Card Number", class: "input-medium" %>
-    <%= f.text_field :verification_value, placeholder: "CVV", class: "input-mini" %>
-  </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <%= f.label :number, "Card Number" %>
+        <%= f.text_field :number, class: "span12" %>
+      </div>
 
-  <div class="controls">
-    <%= f.text_field :month, placeholder: "Expiration Month", class: "input-medium" %>
-    <%= f.text_field :year, placeholder: "Expiration Year", class: "input-medium" %>
-  </div>
+      <div class="span2">
+        <%= f.label :cvv, "CVV" %>
+        <%= f.text_field :verification_value, class: "span12" %>
+      </div>
+    </div>
 
-  <div class="controls">
-    <%= text_field_tag "data[how_many]", @credit_card.how_many, :id => "credit_card_how_many", placeholder: "# of Shirts", class: "input-small" %>
+    <div class="row-fluid">
+      <div class="span3">
+        <%= f.label :month, "Expiration" %>
+        <%= f.text_field :month, placeholder: "Month", class: "span12" %>
+      </div>
+      <div class="span2">
+        <%= f.label :year, "&nbsp;".html_safe %>
+        <%= f.text_field :year, placeholder: "Year", class: "span12" %>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span2">
+        <%= label_tag "data[how_many]", "# of Shirts" %>
+        <%= text_field_tag "data[how_many]", @credit_card.how_many, :id => "credit_card_how_many", class: "span12" %>
+      </div>
+    </div>
   </div>
 </div>
