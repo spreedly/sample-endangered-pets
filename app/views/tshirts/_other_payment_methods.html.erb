@@ -1,8 +1,20 @@
-<span id="other_payment_method_buttons" class="<%= @paying_with_credit_card ? 'hidden' : nil %>">
-  <button type="submit" class="btn" name="payment_method_type" value="sprel">Pay via Sprel</button>
-  <button type="submit" class="btn" name="payment_method_type" value="paypal">Pay via Paypal</button>
+<div id="other_payment_method_buttons" class="<%= @paying_with_credit_card ? 'hidden' : nil %>">
+  <div class="row-fluid">
+    <div class="span8">
+      <%= link_to "Pay via Credit Card", '#', id: "original_pay_with_card_button", class: "btn span4 #{@paying_with_credit_card ? 'hidden' : nil}" %>
+      <button type="submit" class="btn span4" name="payment_method_type" value="sprel">Pay via Sprel</button>
+      <button type="submit" class="btn span4" name="payment_method_type" value="paypal">Pay via Paypal</button>
+      <br/>
+    </div>
+  </div>
+
   <br/>
-  <br/>
-  <button type="submit" class="btn" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
-  <button type="submit" class="btn" name="payment_method_type" value="dwolla">Pay via Dwolla</button>
-</span>
+
+  <div class="row-fluid">
+    <div class="span8">
+      <button type="submit" class="btn span4" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
+      <button type="submit" class="btn span4" name="payment_method_type" value="dwolla">Pay via Dwolla</button>
+    </div>
+  </div>
+
+</div>
