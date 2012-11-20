@@ -7,32 +7,18 @@
 
   </div>
 
-  <%= error_messages_for 'credit_card', :object_name => "credit card" %>
   <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
     <%= error_messages_for object: [ @payment_method, @payment_method.credit_card ] %>
     <%= render 'tshirts/hidden_form_fields' %>
 
     <div class="row-fluid">
       <div class="span8">
-        <div class="row-fluid">
-          <div class="span3">
-            <%= f.label :how_many, "# of Shirts" %>
-            <%= f.text_field :how_many, class: "span12" %>
-          </div>
-        </div>
-
+        <%= render 'tshirts/how_many', f: f %>
         <%= render "tshirts/credit_card_fields" %>
-        <button type="submit" class="btn" name="payment_method_type" value="sprel">Pay via Sprel</button>
-        <button type="submit" class="btn" name="payment_method_type" value="paypal">Pay via Paypal</button>
-        <br/>
-        <br/>
-        <button type="submit" class="btn" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
-        <button type="submit" class="btn" name="payment_method_type" value="dwolla">Pay via Dwolla</button>
-
+        <%= render "tshirts/other_payment_methods" %>
       </div>
     </div>
 
   <% end %>
-
 
 </div>
