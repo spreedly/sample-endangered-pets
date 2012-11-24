@@ -4,6 +4,7 @@ CoreSample::Application.routes.draw do
   match 'transparent_redirect_complete' => 'tshirts#transparent_redirect_complete'
   match 'successful_purchase' => 'tshirts#successful_purchase'
 
+  get 'about' => "home#about"
   root :to => "home#index"
 
 end
