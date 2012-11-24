@@ -50,10 +50,10 @@ class SpreedlyCore
   def self.post_transaction(action, payment_method, options)
     options[:currency_code] ||= "USD"
     transaction = {payment_method_token: payment_method.token}.merge(options)
-    self.post("/gateways/#{env_var_for(payment_method}/#{action}.xml", body: self.to_xml_params(transaction: transaction))
+    self.post("/gateways/#{env_var_for(payment_method)}/#{action}.xml", body: self.to_xml_params(transaction: transaction))
   end
 
-  def env_var_for(payment_method)
+  def self.env_var_for(payment_method)
     ENV["CORE_GATEWAY_FOR_#{payment_method.payment_method_type.upcase}"]
   end
 end
