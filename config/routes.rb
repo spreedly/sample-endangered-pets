@@ -22,5 +22,6 @@ CoreSample::Application.routes.draw do
   get  'admin' => 'admin#index'
   post 'admin/payment_methods/:token/initate_charge' => 'pets#initiate_charge', as: :initiate_charge
 
+  get 'about' => "home#about"
   root to: "home#index"
 end
