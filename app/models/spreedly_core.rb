@@ -1,26 +1,13 @@
 class SpreedlyCore
-  def self.config_file
-    File.expand_path(Rails.root.join('config', 'spreedly_core.yml'))
-  end
-
-  def self.config
-    @config ||= YAML.load(ERB.new(File.read(config_file)).result).with_indifferent_access
-  end
-
-  def self.core_domain
-    config[:core_domain] || "https://spreedlycore.com"
-  end
-
-
   include HTTParty
   headers 'Accept' => 'text/xml'
   headers 'Content-Type' => 'text/xml'
-  basic_auth(config[:api_login], config[:api_secret])
-  base_uri("#{core_domain}/v1")
+  basic_auth(ENV["CORE_API_LOGIN"], ENV["CORE_API_SECRET"])
+  base_uri("#{ENV["CORE_DOMAIN"]}/v1")
   format :xml
 
   def self.api_login
-    config[:api_login]
+    ENV["CORE_API_LOGIN"]
   end
 
   def self.purchase(payment_method, amount, options={})
@@ -42,7 +29,7 @@ class SpreedlyCore
   end
 
   def self.add_payment_method_url
-    "#{core_domain}/v1/payment_methods"
+    "#{ENV["CORE_DOMAIN"]}/v1/payment_methods"
   end
 
   private
@@ -63,6 +50,10 @@ class SpreedlyCore
   def self.post_transaction(action, payment_method, options)
     options[:currency_code] ||= "USD"
     transaction = {payment_method_token: payment_method.token}.merge(options)
-    self.post("/gateways/#{config[:gateway_token_for_payment_method][payment_method.payment_method_type]}/#{action}.xml", body: self.to_xml_params(transaction: transaction))
+    self.post("/gateways/#{env_var_for(payment_method}/#{action}.xml", body: self.to_xml_params(transaction: transaction))
+  end
+
+  def env_var_for(payment_method)
+    ENV["CORE_GATEWAY_FOR_#{payment_method.payment_method_type.upcase}"]
   end
 end

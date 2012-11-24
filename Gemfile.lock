@@ -72,8 +72,8 @@ GEM
     mime-types (1.19)
     multi_json (1.3.7)
     multi_xml (0.5.1)
-    mysql2 (0.3.11)
     nokogiri (1.5.2)
+    pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -141,10 +141,13 @@ DEPENDENCIES
   httparty
   jquery-rails
   log_buddy
-  mysql2
   nokogiri
+<<<<<<< HEAD
   pry-debugger
   pry-rails
+=======
+  pg
+>>>>>>> master
   rails (= 3.2.8)
   sass-rails
   uglifier
