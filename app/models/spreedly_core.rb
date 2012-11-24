@@ -54,7 +54,7 @@ class SpreedlyCore
 
     def self.post_transaction(action, payment_method_token, amount, currency_code="USD")
       transaction = { :amount => amount, :currency_code => currency_code, :payment_method_token => payment_method_token }
-      self.post("/gateways/#{config[:gateway_token]}/#{action}.xml", :body => self.to_xml_params(:transaction => transaction))
+      self.post("/gateways/#{config[:gateway_token_for_payment_method][:credit_card]}/#{action}.xml", :body => self.to_xml_params(:transaction => transaction))
     end
 
 end
