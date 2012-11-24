@@ -142,12 +142,9 @@ DEPENDENCIES
   jquery-rails
   log_buddy
   nokogiri
-<<<<<<< HEAD
+  pg
   pry-debugger
   pry-rails
-=======
-  pg
->>>>>>> master
   rails (= 3.2.8)
   sass-rails
   uglifier
