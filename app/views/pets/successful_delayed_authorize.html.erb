@@ -1,20 +1,16 @@
-<div class="grid_8 prefix_2 suffix_2">
-  <h1>
-    <%= link_to_unless_current "Home", root_url %>
-    &gt; Whooo Hooo!
-  </h1>
-</div>
-
-<div class="grid_8 prefix_2 suffix_2">
-  <div class="panel paddedLeft paddedRight">
-    <p>
-      You have successfully authorized us to charge you.  Well done.  We'll charge you
-      the first time once we start packaging up the first pet.
-    </p>
-
-    <br/>
-    <p>
-      <%= link_to "Buy more stuff!", root_url %>
-    </p>
+<div class="container">
+  <div class="page-header">
+    <h1>Whooo Hooo!</h1>
+    <h2>
+      <small>
+        <p>You have successfully authorized us to charge you.  Well done!</p>
+        <p>We'll charge you the first time once we start packaging up the first pet.</p>
+      </small>
+    </h2>
   </div>
+
+  <p class="lead">
+    <%= link_to "Buy more stuff!", root_url %>
+  </p>
+
 </div>
