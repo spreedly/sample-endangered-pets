@@ -10,7 +10,6 @@ gem "dynamic_form"
 gem 'bootstrap-sass'
 gem 'log_buddy'
 gem 'pg'
-gem 'heroku'
 
 group :assets do
   gem "sass-rails"
