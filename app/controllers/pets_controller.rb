@@ -27,7 +27,7 @@ class PetsController < ApplicationController
     response = SpreedlyCore.purchase(@payment_method, amount_to_charge)
 
     case response.code
-    when 202
+    when 202, 200
       return redirect_to admin_url, notice: "Charge successful.  The funds will be transferred soon."
     else
       set_flash_error(response)
