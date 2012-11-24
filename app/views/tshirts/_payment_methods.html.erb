@@ -3,7 +3,7 @@
     <div class="span8">
       <%= link_to "Pay via Credit Card", '#', id: "original_pay_with_card_button", class: "btn span4 #{@paying_with_credit_card ? 'hidden' : nil}" %>
       <button type="submit" class="btn span4" name="payment_method_type" value="sprel">Pay via Sprel</button>
-      <button type="submit" class="btn span4" name="payment_method_type" value="paypal">Pay via Paypal</button>
+      <button type="submit" class="btn span4" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
       <br/>
     </div>
   </div>
@@ -12,9 +12,20 @@
 
   <div class="row-fluid">
     <div class="span8">
-      <button type="submit" class="btn span4" name="payment_method_type" value="gocardless">Pay via GoCardless</button>
+      <button type="submit" class="btn span4" name="payment_method_type" value="paypal">Pay via Paypal</button>
       <button type="submit" class="btn span4" name="payment_method_type" value="dwolla">Pay via Dwolla</button>
     </div>
   </div>
 
+  <br/>
+  <br/>
+  <br/>
+  <div>
+    <p>
+      * Credit Card, Sprel, and GoCardless are hooked up to test accounts.
+    </p>
+    <p>
+      * Paypal and Dwolla are hooked up to <strong>real accounts</strong> using real money.
+    </p>
+  </div>
 </div>
