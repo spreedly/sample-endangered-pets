@@ -1,24 +1,15 @@
 class SpreedlyCore
 
-  def self.config_file
-    File.expand_path(Rails.root.join('config', 'spreedly_core.yml'))
-  end
-
-  def self.config
-    @config ||= YAML.load(ERB.new(File.read(config_file)).result).with_indifferent_access
-  end
-
-
   include HTTParty
   headers 'Accept' => 'text/xml'
   headers 'Content-Type' => 'text/xml'
-  basic_auth(config[:api_login], config[:api_secret])
-  base_uri("#{config[:core_domain]}/v1")
+  basic_auth(ENV["CORE_API_LOGIN"], ENV["CORE_API_SECRET"])
+  base_uri("#{ENV["CORE_DOMAIN"]}/v1")
   format :xml
 
 
   def self.api_login
-    config[:api_login]
+    ENV["CORE_API_LOGIN"]
   end
 
   def self.purchase(payment_method_token, amount, currency_code="USD")
@@ -34,7 +25,7 @@ class SpreedlyCore
   end
 
   def self.add_payment_method_url
-    "#{config[:core_domain]}/v1/payment_methods"
+    "#{ENV["CORE_DOMAIN"]}/v1/payment_methods"
   end
 
   private
@@ -54,7 +45,7 @@ class SpreedlyCore
 
     def self.post_transaction(action, payment_method_token, amount, currency_code="USD")
       transaction = { :amount => amount, :currency_code => currency_code, :payment_method_token => payment_method_token }
-      self.post("/gateways/#{config[:gateway_token_for_payment_method][:credit_card]}/#{action}.xml", :body => self.to_xml_params(:transaction => transaction))
+      self.post("/gateways/#{ENV["CORE_GATEWAY_FOR_CREDIT_CARD"]}/#{action}.xml", :body => self.to_xml_params(:transaction => transaction))
     end
 
 end
