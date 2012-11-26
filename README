@@ -1,16 +1,3 @@
 
-
-To get the sample site running locally:
-
-Clone or fork the repo.
-cp config/database.yml.example config/database.yml
-rake db:create:all
-rake db:schema:load
-cp config/spreedly_core.yml.example config/spreedly_core.yml
-use curl to create a gateway on Spreedly Core
-Remember the gateway token.
-Adjust the config/spreedly_core.yml with the details of your gateway token.
-
-rails server
-signup for an account
+This is a sample application demonstrating how one might use Spreedly Core.
 
