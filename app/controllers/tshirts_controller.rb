@@ -25,21 +25,21 @@ class TshirtsController < ApplicationController
 
 
   private
-    def set_flash_error(response)
-      if response["errors"]
-        flash.now[:error] = response["errors"].values.first
-      else
-        flash.now[:error] = "#{response['transaction']['response']['message']} #{response['transaction']['response']['error_detail']}"
-      end
+  def set_flash_error(response)
+    if response["errors"]
+      flash.now[:error] = response["errors"]["error"]["__content__"]
+    else
+      flash.now[:error] = "#{response['transaction']['response']['message']} #{response['transaction']['response']['error_detail']}"
     end
+  end
 
-    def error_saving_card
-      return false if params[:error].blank?
+  def error_saving_card
+    return false if params[:error].blank?
 
-      @credit_card = CreditCard.new
-      flash.now[:error] = params[:error]
-      render(:action => :buy_tshirt)
-      true
-    end
+    @credit_card = CreditCard.new
+    flash.now[:error] = params[:error]
+    render(:action => :buy_tshirt)
+    true
+  end
 
 end
