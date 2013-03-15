@@ -61,10 +61,10 @@ class PetsController < ApplicationController
 
   private
   def amount_to_authorize
-    139 * 100
+    109
   end
 
   def amount_to_charge
-    50 * 100
+    20
   end
 end
