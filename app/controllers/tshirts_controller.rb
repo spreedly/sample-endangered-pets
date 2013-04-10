@@ -59,4 +59,8 @@ class TshirtsController < ApplicationController
   def amount_to_charge
     ((TSHIRT_AMOUNT * @payment_method.how_many.to_i) * 100).to_i
   end
+
+  def render_action_for_error_talking_to_core
+    :buy
+  end
 end

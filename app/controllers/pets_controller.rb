@@ -67,4 +67,8 @@ class PetsController < ApplicationController
   def amount_to_charge
     20
   end
+
+  def render_action_for_error_talking_to_core
+    :subscribe
+  end
 end

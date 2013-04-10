@@ -24,7 +24,7 @@ module PaymentsController
 
     @payment_method = PaymentMethod.new
     flash.now[:error] = params[:error]
-    render(action: :buy)
+    render(action: render_action_for_error_talking_to_core)
     true
   end
 
