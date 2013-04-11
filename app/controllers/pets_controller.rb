@@ -10,7 +10,9 @@ class PetsController < ApplicationController
     @payment_method = PaymentMethod.new_from_core_response(SpreedlyCore.get_payment_method(params[:token]))
     @payment_method.recurring = true
 
-    response = SpreedlyCore.authorize(@payment_method, amount_to_authorize, redirect_url: pets_offsite_authorize_redirect_url, callback_url: pets_offsite_callback_url)
+    response = SpreedlyCore.authorize(@payment_method, amount_to_authorize, redirect_url: pets_offsite_authorize_redirect_url,
+                                      callback_url: pets_offsite_callback_url, description: "Endangered Pet Subscription")
+
     return render(action: :subscribe) unless @payment_method.save
 
     case response.code
