@@ -3,13 +3,13 @@ class SpreedlyCore
   include HTTParty
   headers 'Accept' => 'text/xml'
   headers 'Content-Type' => 'text/xml'
-  basic_auth(ENV["CORE_API_LOGIN"], ENV["CORE_API_SECRET"])
+  basic_auth(ENV["CORE_ENVIRONMENT_KEY"], ENV["CORE_ACCESS_SECRET"])
   base_uri("#{ENV["CORE_DOMAIN"]}/v1")
   format :xml
 
 
-  def self.api_login
-    ENV["CORE_API_LOGIN"]
+  def self.environment_key
+    ENV["CORE_ENVIRONMENT_KEY"]
   end
 
   def self.purchase(payment_method_token, amount, currency_code="USD")
