@@ -17,7 +17,7 @@
   <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
     <%= error_messages_for object: [ @payment_method ] %>
     <div class="set">
-      <%= hidden_field_tag :api_login, SpreedlyCore.api_login %>
+      <%= hidden_field_tag :environment_key, SpreedlyCore.environment_key %>
       <%= hidden_field_tag :redirect_url, pets_transparent_redirect_complete_url %>
       <%= hidden_field_tag 'gocardless[interval_length]', "1" %>
       <%= hidden_field_tag 'gocardless[interval_unit]', "month" %>
