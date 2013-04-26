@@ -25,7 +25,7 @@ class PaymentMethod < ActiveRecord::Base
     payment_method.token = attributes["token"]
     payment_method.payment_method_type = attributes["payment_method_type"]
     payment_method.how_many = attributes["data"].try(:[], "how_many")
-    payment_method.email = attributes["data"].try(:[], "email")
+    payment_method.email = attributes["email"]
     payment_method
   end
 
