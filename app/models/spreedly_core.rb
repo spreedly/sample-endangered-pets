@@ -22,7 +22,7 @@ class SpreedlyCore
   end
 
   def self.retain(payment_method)
-    self.put("/payment_methods/#{payment_method.token}/retain.xml")
+    self.put("/payment_methods/#{payment_method.token}/retain.xml", body: '')
   end
 
   def self.get_payment_method(token)
