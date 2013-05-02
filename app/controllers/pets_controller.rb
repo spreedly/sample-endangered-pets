@@ -45,7 +45,7 @@ class PetsController < ApplicationController
     @payment_method = @transaction.payment_method
     case @transaction.state
     when "processing", "succeeded"
-      redirect_to pets_successful_delayed_authorize_url
+      retain_and_finish
     when "gateway_processing_failed"
       flash.now[:error] = @transaction.message
       render :subscribe
@@ -72,5 +72,16 @@ class PetsController < ApplicationController
 
   def render_action_for_error_talking_to_core
     :subscribe
+  end
+
+  def retain_and_finish
+    response = SpreedlyCore.retain(@payment_method)
+    case response.code
+    when 200
+      redirect_to pets_successful_delayed_authorize_url
+    else
+      set_flash_error(response)
+      render(action: :subscribe)
+    end
   end
 end

@@ -21,6 +21,10 @@ class SpreedlyCore
     post_transaction("authorize", payment_method, options)
   end
 
+  def self.retain(payment_method)
+    self.put("/payment_methods/#{payment_method.token}/retain.xml")
+  end
+
   def self.get_payment_method(token)
     self.get("/payment_methods/#{token}.xml")
   end
