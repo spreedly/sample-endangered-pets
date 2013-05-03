@@ -12,7 +12,12 @@ module PaymentsController
 
   def set_flash_error(response)
     if response["errors"]
-      flash.now[:error] = response["errors"]["error"]["__content__"]
+      details = response["errors"]["error"]
+      if details.kind_of? Array
+        flash.now[:error] = details.map { |e| e["__content__"] }
+      else
+        flash.now[:error] = details["__content__"]
+      end
     else
       t = Transaction.new(response)
       flash.now[:error] =  "#{t.message} (#{t.state.humanize})"
