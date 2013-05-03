@@ -11,7 +11,8 @@ class PetsController < ApplicationController
     @payment_method.recurring = true
 
     response = SpreedlyCore.authorize(@payment_method, amount_to_authorize, redirect_url: pets_offsite_authorize_redirect_url,
-                                      callback_url: pets_offsite_callback_url, description: "Endangered Pet Subscription")
+                                      callback_url: pets_offsite_callback_url, description: "Endangered Pet Subscription",
+                                      retain_on_success: true)
 
     return render(action: :subscribe) unless @payment_method.save
 
@@ -45,7 +46,7 @@ class PetsController < ApplicationController
     @payment_method = @transaction.payment_method
     case @transaction.state
     when "processing", "succeeded"
-      retain_and_finish
+      redirect_to pets_successful_delayed_authorize_url
     when "gateway_processing_failed"
       flash.now[:error] = @transaction.message
       render :subscribe
@@ -74,14 +75,4 @@ class PetsController < ApplicationController
     :subscribe
   end
 
-  def retain_and_finish
-    response = SpreedlyCore.retain(@payment_method)
-    case response.code
-    when 200
-      redirect_to pets_successful_delayed_authorize_url
-    else
-      set_flash_error(response)
-      render(action: :subscribe)
-    end
-  end
 end
