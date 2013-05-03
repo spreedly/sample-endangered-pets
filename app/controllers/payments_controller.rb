@@ -11,7 +11,6 @@ module PaymentsController
   end
 
   def set_flash_error(response)
-    logger.fatal response.body
     if response["errors"]
       flash.now[:error] = response["errors"]["error"]["__content__"]
     else
