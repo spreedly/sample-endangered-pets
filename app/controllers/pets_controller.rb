@@ -28,10 +28,13 @@ class PetsController < ApplicationController
   def initiate_charge
     @payment_method = PaymentMethod.find_by_token!(params[:token])
     response = SpreedlyCore.purchase(@payment_method, amount_to_charge)
+    transaction = Transaction.new(response)
 
     case response.code
     when 202, 200
-      return redirect_to admin_url, notice: "Charge successful.  The funds will be transferred soon."
+      message = "Charge successful."
+      message += "  The funds will be transferred soon." if transaction.state == "processing"
+      return redirect_to admin_url, notice: message
     else
       set_flash_error(response)
       render(template: 'admin/index')
@@ -68,7 +71,7 @@ class PetsController < ApplicationController
   end
 
   def amount_to_charge
-    20
+    3
   end
 
   def render_action_for_error_talking_to_core

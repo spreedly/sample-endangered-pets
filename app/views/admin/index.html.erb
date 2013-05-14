@@ -27,7 +27,7 @@
     <% for payment_method in PaymentMethod.all -%>
       <li>
         <%= payment_method.email %>
-        <%= link_to "Charge $0.20", initiate_charge_url(payment_method.token), method: :post %>
+        <%= link_to "Charge $0.03", initiate_charge_url(payment_method.token), method: :post %>
 
       </li>
 
