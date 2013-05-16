@@ -2,13 +2,8 @@
   <%= fields_for @payment_method.credit_card, as: :credit_card do |f| %>
     <div class="row-fluid">
       <div class="span3">
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name, class: "span12" %>
-      </div>
-
-      <div class="span3">
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name, class: "span12" %>
+        <%= f.label :full_name, "Name" %>
+        <%= f.text_field :full_name, class: "span12" %>
       </div>
     </div>
 

@@ -2,7 +2,7 @@ class CreditCard
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  attr_accessor :first_name, :last_name, :card_type, :number, :verification_value, :month, :year
+  attr_accessor :first_name, :last_name, :card_type, :number, :verification_value, :month, :year, :full_name
   validate :incorporate_errors_from_core
 
   def initialize(core_response = nil)
