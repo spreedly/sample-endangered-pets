@@ -5,7 +5,7 @@ CoreSample::Application.routes.draw do
     get :successful_purchase
     get :successful_delayed_purchase
     get :offsite_redirect
-    get :offsite_callback, format: :xml
+    get :offsite_callback
     get :history
   end
 
@@ -15,7 +15,7 @@ CoreSample::Application.routes.draw do
     get :successful_delayed_authorize
     get :successful_delayed_purchase
     get :offsite_authorize_redirect
-    get :offsite_callback, format: :xml
+    get :offsite_callback
     get :history
   end
 

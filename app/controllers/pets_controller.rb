@@ -27,7 +27,7 @@ class PetsController < ApplicationController
 
   def initiate_charge
     @payment_method = PaymentMethod.find_by_token!(params[:token])
-    response = SpreedlyCore.purchase(@payment_method, amount_to_charge)
+    response = SpreedlyCore.purchase(@payment_method, amount_to_charge, callback_url: pets_offsite_callback_url)
 
     case response.code
     when 202, 200
