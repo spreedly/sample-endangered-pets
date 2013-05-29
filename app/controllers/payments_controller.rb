@@ -2,7 +2,7 @@ module PaymentsController
 
   def offsite_callback
     @@transactions_called_back ||= []
-    @@transactions_called_back.concat(params[:transactions][:transaction].collect{|t| "#{t[:token]} for #{t[:amount]}: #{t[:message]} (#{t[:state]})"})
+    @@transactions_called_back.concat(strings_for_transactions)
     head :ok
   end
 
@@ -31,6 +31,13 @@ module PaymentsController
     flash.now[:error] = params[:error]
     render(action: render_action_for_error_talking_to_core)
     true
+  end
+
+  private
+  def strings_for_transactions
+    Array.wrap(params[:transactions][:transaction]).collect do |t|
+      "#{t[:token]} for #{t[:amount]}: #{t[:message]} (#{t[:state]})"
+    end
   end
 
 end
