@@ -24,7 +24,7 @@
       <%= hidden_field_tag 'gocardless[name]', "Monthly Extinct Pet" %>
       <%= hidden_field_tag 'gocardless[description]', "Receive one cute cuddly pet every month" %>
 
-      <%= text_field_tag :email %>
+      <%= text_field_tag :email, params[:email], placeholder: "Your Email Address" %>
 
       <br/><br/>
       <button type="submit" class="btn" name="payment_method_type" value="sprel">Pay via Sprel</button>
