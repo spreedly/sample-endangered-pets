@@ -5,14 +5,7 @@ development:
   password: <%= ENV["DATABASE_PASSWORD"] %>
   pool: 5
   encoding: <%= ENV["DATABASE_ENCODING"] %>
-
-production:
-  adapter: <%= ENV["DATABASE_ADAPTER"] %>
-  database: <%= ENV["DATABASE_NAME"] %>
-  username: <%= ENV["DATABASE_USER"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  pool: 5
-  encoding: <%= ENV["DATABASE_ENCODING"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
 
 test:
   adapter: <%= ENV["DATABASE_ADAPTER"] %>
@@ -22,3 +15,4 @@ test:
   pool: 5
   encoding: <%= ENV["DATABASE_ENCODING"] %>
   min_messages: warning
+  host: <%= ENV["DATABASE_HOST"] %>
