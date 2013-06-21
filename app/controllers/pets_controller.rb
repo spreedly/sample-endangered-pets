@@ -10,11 +10,11 @@ class PetsController < ApplicationController
     @payment_method = PaymentMethod.new_from_core_response(SpreedlyCore.get_payment_method(params[:token]))
     @payment_method.recurring = true
 
+    return render(action: :subscribe) unless @payment_method.valid?
+
     response = SpreedlyCore.authorize(@payment_method, amount_to_authorize, redirect_url: pets_offsite_authorize_redirect_url,
                                       callback_url: pets_offsite_callback_url, description: "Endangered Pet Subscription",
                                       retain_on_success: true)
-
-    return render(action: :subscribe) unless @payment_method.save
 
     case response.code
     when 202
@@ -27,7 +27,10 @@ class PetsController < ApplicationController
 
   def initiate_charge
     @payment_method = PaymentMethod.find_by_token!(params[:token])
-    response = SpreedlyCore.purchase(@payment_method, amount_to_charge, callback_url: pets_offsite_callback_url)
+
+    order = Order.create_pet_club_charge_order!(@payment_method)
+    response = SpreedlyCore.purchase(@payment_method, order.amount, callback_url: pets_offsite_callback_url)
+    order.update_from(response)
 
     case response.code
     when 202, 200
@@ -47,8 +50,10 @@ class PetsController < ApplicationController
 
     @transaction = Transaction.new(SpreedlyCore.get_transaction(params[:transaction_token]))
     @payment_method = @transaction.payment_method
+
     case @transaction.state
     when "processing", "succeeded"
+      @payment_method.save!
       redirect_to pets_successful_delayed_authorize_url
     when "gateway_processing_failed"
       flash.now[:error] = @transaction.message
@@ -68,10 +73,6 @@ class PetsController < ApplicationController
   private
   def amount_to_authorize
     109
-  end
-
-  def amount_to_charge
-    3
   end
 
   def render_action_for_error_talking_to_core

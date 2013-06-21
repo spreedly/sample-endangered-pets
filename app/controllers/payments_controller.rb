@@ -1,13 +1,13 @@
 module PaymentsController
 
   def offsite_callback
-    @@transactions_called_back ||= []
-    @@transactions_called_back.concat(strings_for_transactions)
+    transactions = Array.wrap(params[:transactions][:transaction]).collect do |each|
+      transaction = Transaction.new({ 'transaction' => each })
+      payment_method = transaction.payment_method
+      payment_method.save! if payment_method.recurring && transaction.processing_or_succeeded?
+      transaction.update_order
+    end
     head :ok
-  end
-
-  def history
-    @transactions = (defined?(@@transactions_called_back) ? @@transactions_called_back : [])
   end
 
   def set_flash_error(response)
@@ -31,13 +31,6 @@ module PaymentsController
     flash.now[:error] = params[:error]
     render(action: render_action_for_error_talking_to_core)
     true
-  end
-
-  private
-  def strings_for_transactions
-    Array.wrap(params[:transactions][:transaction]).collect do |t|
-      "#{t[:token]} for #{t[:amount]}: #{t[:message]} (#{t[:state]})"
-    end
   end
 
 end

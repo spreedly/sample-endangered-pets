@@ -6,7 +6,6 @@ CoreSample::Application.routes.draw do
     get :successful_delayed_purchase
     get :offsite_redirect
     post :offsite_callback
-    get :history
   end
 
   scope(path: "pets", controller: :pets, as: :pets) do
@@ -16,11 +15,11 @@ CoreSample::Application.routes.draw do
     get :successful_delayed_purchase
     get :offsite_authorize_redirect
     post :offsite_callback
-    get :history
   end
 
   get  'admin' => 'admin#index'
   post 'admin/payment_methods/:token/initate_charge' => 'pets#initiate_charge', as: :initiate_charge
+  resources :orders, only: [ :index ]
 
   get 'about' => "home#about"
   root to: "home#index"

@@ -1,11 +1,13 @@
 class PaymentMethod < ActiveRecord::Base
-  attr_accessor :how_many, :recurring
+  attr_accessor :how_many
   attr_writer   :credit_card
 
   validates_presence_of :how_many, unless: :recurring
   validates_presence_of :email, if: :recurring
   validates_numericality_of :how_many, only_integer: true, allow_nil: true
   validate :credit_card_is_valid, if: :is_credit_card?
+
+  scope :recurring, where(recurring: true)
 
   def self.each(current=nil)
     methods = SpreedlyCore.config["payment_methods"].keys
@@ -26,6 +28,7 @@ class PaymentMethod < ActiveRecord::Base
     payment_method.payment_method_type = attributes["payment_method_type"]
     payment_method.how_many = attributes["data"].try(:[], "how_many")
     payment_method.email = attributes["email"]
+    payment_method.recurring = !payment_method.email.blank?
     payment_method
   end
 

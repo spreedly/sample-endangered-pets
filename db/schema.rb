@@ -11,14 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024131959) do
+ActiveRecord::Schema.define(:version => 20130621172559) do
+
+  create_table "orders", :force => true do |t|
+    t.string   "order_type"
+    t.integer  "payment_method_id"
+    t.integer  "quantity"
+    t.integer  "amount"
+    t.string   "state",             :default => "created"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.string   "email"
+  end
 
   create_table "payment_methods", :force => true do |t|
     t.string   "email"
     t.string   "token"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "payment_method_type"
+    t.boolean  "recurring",           :default => false
   end
 
   add_index "payment_methods", ["token"], :name => "index_payment_methods_on_token"

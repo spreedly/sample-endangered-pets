@@ -1,0 +1,46 @@
+
+<div class="container">
+  <div class="page-header">
+    <h1>Orders</h1>
+    <h2>
+      <small>
+        <p>
+          This is where we show the actual purchases.
+        </p>
+      </small>
+    </h2>
+
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Order Type</th>
+        <th>Payment Method Type</th>
+        <th>State</th>
+        <th>Email</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+      </tr>
+
+      <tbody>
+
+        <% for order in @orders -%>
+          <tr>
+            <td><%= order.created_at.to_s(:short) %></td>
+            <td><%= order.order_type %></td>
+            <td><%= order.payment_method.try(:payment_method_type) %></td>
+            <td><%= order.state.titleize %></td>
+            <td><%= order.email %></td>
+            <td><%= order.quantity %></td>
+            <td><%= number_to_currency(order.amount/100.0) %></td>
+
+          </tr>
+        <% end -%>
+
+      </tbody>
+    </thead>
+
+  </table>
+</div>

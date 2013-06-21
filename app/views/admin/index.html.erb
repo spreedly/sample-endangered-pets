@@ -20,17 +20,36 @@
   </div>
 
   <p>
-    Here are the email addresses of the people who have signed up for our Endangered Pet of the Month Club:
+    These are the email addresses of the people who have signed up and been authorized to participate in the Endangered Pet of the Month Club.
   </p>
 
-  <ul>
-    <% for payment_method in PaymentMethod.all -%>
-      <li>
-        <%= payment_method.email %>
-        <%= link_to "Charge $0.03", initiate_charge_url(payment_method.token), method: :post %>
+  <p>
+    If you click the charge link next to an email address, we'll charge 3 cents against the payment method associated with that email address.
+  </p>
 
-      </li>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Authorized</th>
+        <th>Email</th>
+        <th>Payment Method Type</th>
+        <th>Actions</th>
+      </tr>
 
-    <% end -%>
-  </ul>
+      <tbody>
+
+        <% for payment_method in @payment_methods -%>
+          <tr>
+            <td><%= payment_method.created_at.to_s(:short) %></td>
+            <td><%= payment_method.email %></td>
+            <td><%= payment_method.payment_method_type %></td>
+            <td><%= link_to "Charge", initiate_charge_url(payment_method.token), method: :post %></td>
+          </tr>
+        <% end -%>
+
+      </tbody>
+    </thead>
+
+  </table>
+  
 </div>
