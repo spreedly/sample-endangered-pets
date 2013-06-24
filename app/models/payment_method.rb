@@ -20,7 +20,7 @@ class PaymentMethod < ActiveRecord::Base
   end
 
   def self.new_from_core_response(response)
-    payment_method = PaymentMethod.new
+    payment_method = PaymentMethod.find_by_token(response["payment_method"]["token"]) || PaymentMethod.new
     payment_method.credit_card = CreditCard.new(response)
 
     attributes = response["payment_method"]
