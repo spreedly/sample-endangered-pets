@@ -43,4 +43,22 @@
     </thead>
 
   </table>
+
+  <br/>
+  <h1>Settle Test Gateway Transactions</h1>
+  <p>
+    Delayed transactions like eChecks may reach the "processing" state to indicate that the transaction has been accepted but that the funds haven't actually cleared yet.  For some payment method types, it could take days for a transaction to move to a succeeded or a gateway_processing_failed state.
+  </p>
+
+  <p>
+    For the Test Gateway, we can trigger this process manually.  Use the buttons below to do so.
+  </p>
+
+  <%= form_tag('/orders/settle') do -%>
+    <div>
+      <button type="submit" class="btn span2" name="state" value="succeeded">Succeeded</button>
+      <button type="submit" class="btn span2" name="state" value="gateway_processing_failed">Failed</button>
+    </div>
+  <% end -%>
+
 </div>

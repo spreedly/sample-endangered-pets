@@ -29,7 +29,7 @@ class PetsController < ApplicationController
     @payment_method = PaymentMethod.find_by_token!(params[:token])
 
     order = Order.create_pet_club_charge_order!(@payment_method)
-    response = SpreedlyCore.purchase(@payment_method, order.amount, callback_url: pets_offsite_callback_url)
+    response = SpreedlyCore.purchase(@payment_method, order.amount, callback_url: pets_offsite_callback_url, order_id: order.id)
     order.update_from(response)
 
     case response.code

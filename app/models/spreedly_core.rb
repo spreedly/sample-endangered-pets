@@ -37,6 +37,10 @@ class SpreedlyCore
     "#{ENV["CORE_DOMAIN"]}/v1/payment_methods"
   end
 
+  def self.settle_test_gateway_transactions(state)
+    self.post("/gateways/#{ENV['CORE_GATEWAY_FOR_SPREL']}/settle.xml", body: self.to_xml_params(settlement: { state: state }))
+  end
+
   private
   def self.to_xml_params(hash)
     hash.collect do |key, value|
