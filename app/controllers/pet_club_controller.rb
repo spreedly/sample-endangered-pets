@@ -42,6 +42,7 @@ class PetClubController < ApplicationController
       return redirect_to admin_url, notice: message
     else
       set_flash_error(response)
+      @payment_methods = PaymentMethod.recurring.order('created_at DESC')
       render(template: 'admin/index')
     end
 
