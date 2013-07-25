@@ -7,6 +7,8 @@ class PetClubController < ApplicationController
   end
 
   def transparent_redirect_complete
+    return if error_talking_to_core
+
     @payment_method = PaymentMethod.new_from_core_response(SpreedlyCore.get_payment_method(params[:token]))
     @payment_method.recurring = true
 
