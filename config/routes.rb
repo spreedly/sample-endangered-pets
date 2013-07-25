@@ -1,5 +1,5 @@
 CoreSample::Application.routes.draw do
-  scope(path: "tshirts", controller: :tshirts, as: :tshirts) do
+  scope(path: "pets", controller: :pets, as: :pets) do
     match :buy
     get :transparent_redirect_complete
     get :successful_purchase
@@ -8,7 +8,7 @@ CoreSample::Application.routes.draw do
     post :offsite_callback
   end
 
-  scope(path: "pets", controller: :pets, as: :pets) do
+  scope(path: "pet_club", controller: :pet_club, as: :pet_club) do
     match :subscribe
     get :transparent_redirect_complete
     get :successful_delayed_authorize
@@ -18,7 +18,7 @@ CoreSample::Application.routes.draw do
   end
 
   get  'admin' => 'admin#index'
-  post 'admin/payment_methods/:token/initate_charge' => 'pets#initiate_charge', as: :initiate_charge
+  post 'admin/payment_methods/:token/initate_charge' => 'pet_club#initiate_charge', as: :initiate_charge
   resources :orders, only: [ :index ] do
     collection do
       post :settle

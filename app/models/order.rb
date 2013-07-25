@@ -3,8 +3,8 @@ class Order < ActiveRecord::Base
   TSHIRT_PRICE = 0.02
   belongs_to :payment_method
 
-  def self.create_tshirt_order!(payment_method)
-    order = Order.new(order_type: :tshirt)
+  def self.create_pets_order!(payment_method)
+    order = Order.new(order_type: :pet)
     order.payment_method = payment_method
     order.quantity = payment_method.how_many
     order.amount = ((TSHIRT_PRICE * payment_method.how_many.to_i) * 100).to_i

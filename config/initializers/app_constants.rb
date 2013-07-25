@@ -1,1 +1,1 @@
-APP_NAME = "Spreedly Core Sample"
+APP_NAME = "Endangered Pets For All"

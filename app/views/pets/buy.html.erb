@@ -1,6 +1,6 @@
 <div class="container">
   <div class="page-header">
-    <h1>Buy TShirts</h1>
+    <h1>Buy Endangered Pets</h1>
     <h2>
       <small>For only 2 cents a piece!</small>
     </h2>
@@ -9,13 +9,13 @@
 
   <%= form_for @payment_method, as: :data, url: SpreedlyCore.add_payment_method_url do |f| %>
     <%= error_messages_for object: [ @payment_method, @payment_method.credit_card ] %>
-    <%= render 'tshirts/hidden_form_fields' %>
+    <%= render 'pets/hidden_form_fields' %>
 
     <div class="row-fluid">
       <div class="span8">
-        <%= render 'tshirts/how_many', f: f %>
-        <%= render "tshirts/credit_card_fields" %>
-        <%= render "tshirts/payment_methods" %>
+        <%= render 'pets/how_many', f: f %>
+        <%= render "pets/credit_card_fields" %>
+        <%= render "pets/payment_methods" %>
       </div>
     </div>
 
