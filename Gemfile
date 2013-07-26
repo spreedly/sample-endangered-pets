@@ -9,11 +9,12 @@ gem "nokogiri"
 gem "dynamic_form"
 gem "awesome_print"
 gem 'bootstrap-sass'
-gem 'log_buddy'
 gem 'pg'
 
 group :test, :development do
   gem 'pry-rails'
+  gem 'log_buddy'
+  gem 'awesome_print'
 end
 
 group :assets do
