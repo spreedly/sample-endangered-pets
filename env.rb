@@ -5,8 +5,8 @@ require dotenv if File.exist?(dotenv)
 ENV["RAILS_ENV"] ||= "development"
 
 ENV["DATABASE_ADAPTER"] ||= "postgresql"
-ENV["DATABASE_NAME"] ||= "core_sample"
-ENV["DATABASE_TEST_NAME"] ||= "core_sample_test"
+ENV["DATABASE_NAME"] ||= "spreedly_endangered_pets"
+ENV["DATABASE_TEST_NAME"] ||= "spreedly_endangered_pets_test"
 ENV["DATABASE_USER"] ||= "root"
 ENV["DATABASE_PASSWORD"] ||= ""
 ENV["DATABASE_ENCODING"] ||= "unicode"

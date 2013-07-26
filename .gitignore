@@ -1,9 +1,5 @@
 .bundle
-db/*.sqlite3
 log/*.log
-tmp/**/*
-tmp/*
-config/spreedly_core.yml
-*.tmproj
+tmp
 vendor/ruby
 .env.rb
