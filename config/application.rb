@@ -10,7 +10,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module CoreSample
+module EndangeredPetsSample
   class Application < Rails::Application
 
     config.autoload_paths += %W(#{config.root}/lib)

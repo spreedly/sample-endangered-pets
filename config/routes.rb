@@ -1,4 +1,4 @@
-CoreSample::Application.routes.draw do
+EndangeredPetsSample::Application.routes.draw do
   scope(path: "pets", controller: :pets, as: :pets) do
     match :buy
     get :transparent_redirect_complete
