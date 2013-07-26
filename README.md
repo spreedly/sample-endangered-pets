@@ -5,4 +5,6 @@ This is a sample application designed to demonstrate how to use [Spreedly](https
 
 You can see it running at [http://spreedly-endangered-pets.herokuapp.com](http://spreedly-endangered-pets.herokuapp.com/).
 
+It uses the [httparty](https://github.com/jnunemaker/httparty) gem.
+
 
