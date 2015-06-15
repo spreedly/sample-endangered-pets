@@ -45,7 +45,11 @@ class PetClubController < ApplicationController
       @payment_methods = PaymentMethod.recurring.order('created_at DESC')
       render(template: 'admin/index')
     end
+  end
 
+  def remove_payment_methods
+    PaymentMethod.destroy_all
+    redirect_to admin_url, notice: "Removed payment methods"
   end
 
   def offsite_authorize_redirect

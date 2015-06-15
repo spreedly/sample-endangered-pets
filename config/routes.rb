@@ -19,6 +19,7 @@ EndangeredPetsSample::Application.routes.draw do
 
   get  'admin' => 'admin#index'
   post 'admin/payment_methods/:token/initate_charge' => 'pet_club#initiate_charge', as: :initiate_charge
+  post 'admin/payment_methods/remove' => 'pet_club#remove_payment_methods', as: :remove_payment_methods
   resources :orders, only: [ :index ] do
     collection do
       post :settle

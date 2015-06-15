@@ -51,5 +51,6 @@
     </thead>
 
   </table>
-  
+
+  <%= link_to "Remove all stored payment methods", remove_payment_methods_url, { method: :post }, confirm: "Are sure you'd like to remove the payment methods?" %>
 </div>
