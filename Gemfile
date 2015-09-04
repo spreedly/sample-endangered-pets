@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby "1.9.3"
+ruby "2.1.7"
 gem 'rails', '3.2.13'
 gem "jquery-rails"
 gem "httparty"
@@ -14,7 +14,6 @@ gem 'pg'
 group :test, :development do
   gem 'pry-rails'
   gem 'log_buddy'
-  gem 'awesome_print'
 end
 
 group :assets do
