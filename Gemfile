@@ -7,7 +7,6 @@ gem "httparty"
 gem "colored"
 gem "nokogiri"
 gem "dynamic_form"
-gem "awesome_print"
 gem 'bootstrap-sass'
 gem 'pg'
 
