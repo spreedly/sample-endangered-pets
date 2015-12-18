@@ -29,7 +29,6 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     arel (3.0.2)
-    awesome_print (1.0.2)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.0.4)
@@ -124,7 +123,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  awesome_print
   bootstrap-sass
   coffee-rails
   colored
@@ -138,3 +136,6 @@ DEPENDENCIES
   rails (= 3.2.13)
   sass-rails
   uglifier
+
+BUNDLED WITH
+   1.10.6
