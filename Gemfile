@@ -11,7 +11,7 @@ gem 'bootstrap-sass'
 gem 'pg'
 
 group :test, :development do
-  gem 'pry-rails'
+  gem 'byebug'
   gem 'log_buddy'
 end
 
