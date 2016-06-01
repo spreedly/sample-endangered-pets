@@ -7,4 +7,26 @@ You can see it running at [http://spreedly-endangered-pets.herokuapp.com](http:/
 
 It uses the [httparty](https://github.com/jnunemaker/httparty) gem.
 
+## Running
 
+A free Spreedly [developer test account](https://id.spreedly.com/signup) is
+required for this sample application to interact with the Spreedly API.
+
+Requirements:
+
+- [Postgres](http://postgresapp.com/) running locally
+
+To run:
+
+```
+$ git clone https://github.com/spreedly/sample-endangered-pets.git
+$ cd sample-endangered-pets
+$ bundle install
+$ rake db:create
+$ rake db:migrate
+$ bundle exec rails server
+```
+
+Create a test environment in your account, and replace the keys in `env.rb` with
+keys you generate there. Consult the [docs](https://docs.spreedly.com) to
+learn how to generate API keys, access secrets, and gateway tokens.
