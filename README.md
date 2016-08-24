@@ -12,9 +12,8 @@ It uses the [httparty](https://github.com/jnunemaker/httparty) gem.
 A free Spreedly [developer test account](https://id.spreedly.com/signup) is
 required for this sample application to interact with the Spreedly API.
 
-Requirements:
-
-- [Postgres](http://postgresapp.com/) running locally
+You need Postgres on your local system, either through [Postgres.app](http://postgresapp.com/),
+or Homebrew (`brew install postgresql`).
 
 To run:
 
